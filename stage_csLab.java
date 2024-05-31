@@ -108,7 +108,7 @@ public class stage_csLab extends Application{
 
     }
     private static String readFile(String p) throws IOException{
-        String path = ".gitignore/csLab_questions/" + p + ".txt";
+        String path = "src/csLab_questions/" + p + ".txt";
         File file = new File(path);
         FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader);

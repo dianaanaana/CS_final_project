@@ -1,3 +1,4 @@
-.vscode/*.json
+.vscode
 template.txt
-csLab_questions/*.txt
+# src/csLab_questions/*.txt
+src
