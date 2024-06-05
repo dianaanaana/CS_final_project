@@ -8,7 +8,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application{
+    static Stage stage;
     public void start(Stage stage) throws IOException{
+        Main.stage = stage;
         // scene setting
         VBox center = new VBox();
         Button startGame = new Button();
@@ -17,12 +19,20 @@ public class Main extends Application{
         center.getChildren().addAll(startGame, settings);
         BorderPane pane_main = new BorderPane();
         pane_main.setCenter(center);
-        Scene scene = new Scene(pane_main, 1920, 1080);
+        Scene scene = new Scene(pane_main, 1080, 720);
+
+        startGame.setOnAction(e -> {
+            stage.setScene(dorm.scene(540, 360));
+        });
         // stage setting
         stage.setTitle("ncuRPG");
         stage.setScene(scene);
         stage.show();
     }
+    public static void switchScene(Scene scene) {
+        stage.setScene(scene);
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }
