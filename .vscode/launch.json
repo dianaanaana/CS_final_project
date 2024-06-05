@@ -7,6 +7,78 @@
     "configurations": [
         {
             "type": "java",
+            "name": "slider_for_music",
+            "request": "launch",
+            "mainClass": "slider_for_music",
+            "projectName": "final_project_ee4edc90",
+            "vmArgs": "--module-path \"C:/D/code/javafx/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml --add-modules javafx.controls,javafx.media"
+        },
+        {
+            "type": "java",
+            "name": "computerScience",
+            "request": "launch",
+            "mainClass": "computerScience",
+            "projectName": "final_project_ee4edc90",
+            "vmArgs": "--module-path \"C:/D/code/javafx/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "discrete",
+            "request": "launch",
+            "mainClass": "discrete",
+            "projectName": "final_project_ee4edc90",
+            "vmArgs": "--module-path \"C:/D/code/javafx/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Engineer",
+            "request": "launch",
+            "mainClass": "Engineer",
+            "projectName": "final_project_ee4edc90",
+            "vmArgs": "--module-path \"C:/D/code/javafx/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "calculus",
+            "request": "launch",
+            "mainClass": "calculus",
+            "projectName": "final_project_ee4edc90",
+            "vmArgs": "--module-path \"C:/D/code/javafx/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "road_1",
+            "request": "launch",
+            "mainClass": "road_1",
+            "projectName": "final_project_ee4edc90",
+            "vmArgs": "--module-path \"C:/D/code/javafx/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "building_1",
+            "request": "launch",
+            "mainClass": "building_1",
+            "projectName": "final_project_ee4edc90",
+            "vmArgs": "--module-path \"C:/D/code/javafx/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "final_project_ee4edc90",
+            "vmArgs": "--module-path \"C:/D/code/javafx/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "dorm",
+            "request": "launch",
+            "mainClass": "dorm",
+            "projectName": "final_project_ee4edc90",
+            "vmArgs": "--module-path \"C:/D/code/javafx/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",
@@ -15,9 +87,9 @@
         },
         {
             "type": "java",
-            "name": "stage_csLab",
+            "name": "csLab",
             "request": "launch",
-            "mainClass": "stage_csLab",
+            "mainClass": "csLab",
             "projectName": "final_project_ee4edc90",
             "vmArgs": "--module-path \"C:/D/code/javafx/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
         },
