@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -111,8 +112,7 @@ public class calculus extends Application{
 		pane.setBottom(vBox);
 		vBox.setAlignment(Pos.BOTTOM_CENTER);
 		scene.setOnKeyPressed(e ->{
-			switch(e.getCode()) {
-			case SPACE: 
+			if(e.getCode() == KeyCode.SPACE) {
 				timeline.play();
 				boolean achieve = rectangle.getBoundsInLocal().intersects(obj.get_target().getBoundsInLocal());
 				if(achieve) {
@@ -149,8 +149,47 @@ public class calculus extends Application{
 					pane_ctrler.setCenter(Conclude(score, false));
 					b2b = true;
 				}
-				break;
 			}
+			// switch(e.getCode()) {
+			// case SPACE: 
+			// 	timeline.play();
+			// 	boolean achieve = rectangle.getBoundsInLocal().intersects(obj.get_target().getBoundsInLocal());
+			// 	if(achieve) {
+			// 		obj.switch_target();
+			// 		round+=1;
+			// 		roundLabel.setText("Round: " + String.valueOf(round));
+
+			// 	} else {
+			// 		score-=10;
+			// 		win_not.setText(String.valueOf(score));
+			// 	}
+			// 	if(round == 10 && score >= 60) {
+			// 		scene.setOnKeyPressed(null);
+			// 		timeline.stop();
+			// 		// Scene conclude = Conclude(score, true);
+			// 		// primaryStage.setScene(conclude);
+			// 		// Main.switchScene(conclude);
+			// 		pane_ctrler.setCenter(Conclude(score, true));
+			// 		b2b = true;
+			// 	} else if(round == 10 && score < 60) {
+			// 		scene.setOnKeyPressed(null);
+			// 		timeline.stop();
+			// 		// Scene conclude = Conclude(score, false);
+			// 		// primaryStage.setScene(conclude);
+			// 		// Main.switchScene(conclude);
+			// 		pane_ctrler.setCenter(Conclude(score, false));
+			// 		b2b = true;
+			// 	} else if(score == 0) {
+			// 		scene.setOnKeyPressed(null);
+			// 		timeline.stop();
+			// 		// Scene conclude = Conclude(score, false);
+			// 		// primaryStage.setScene(conclude);
+			// 		// Main.switchScene(conclude);
+			// 		pane_ctrler.setCenter(Conclude(score, false));
+			// 		b2b = true;
+			// 	}
+			// 	break;
+			// }
 		});
 		scene.setOnMouseClicked(e -> {
 			if(b2b) Main.switchScene(building_1.scene(0, 360));
