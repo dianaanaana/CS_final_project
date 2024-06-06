@@ -7,6 +7,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "building_2",
+            "request": "launch",
+            "mainClass": "building_2",
+            "projectName": "final_project_ee4edc90",
+            "vmArgs": "--module-path \"C:/D/code/javafx/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
             "name": "slider_for_music",
             "request": "launch",
             "mainClass": "slider_for_music",

@@ -39,13 +39,13 @@ public class discrete extends Application{
     static Image bomb1 = new Image("/src/images/bomb1.jpg");
     static Image bomb2 = new Image("/src/images/bomb2.gif");
     static BorderPane pane = new BorderPane();
-    static Scene scene = new Scene(pane, 1080, 720);
-    static int gameTime = 10;
+    static Scene scene = new Scene(pane, 1280, 720);
+    static int gameTime = 60;
     static Text timerText = new Text();
     static int[][][] positions = {
-        {{0, 0}, {135, 0}, {270, 0}, {405, 0}, {540, 0}, {675, 0}, {810, 0}, {945, 0}, {1080, 0},
+        {{0, 0}, {160, 0}, {320, 0}, {480, 0}, {640, 0}, {800, 0}, {960, 0}, {1120, 0}, {1280, 0},
          {0, 120}, {0, 240}, {0, 360}, {0, 480}, {0, 600}},
-        {{0, 720}, {135, 720}, {270, 720}, {405, 720}, {540, 720}, {675, 720}, {810, 720}, {945, 720}, {1080, 720},
+        {{0, 720}, {160, 720}, {320, 720}, {480, 720}, {640, 720}, {800, 720}, {960, 720}, {1120, 720}, {1280, 720},
          {1080, 120}, {1080, 240}, {1080, 360}, {1080, 480}, {1080, 600}}
     };
 public static Scene scene() {
@@ -57,8 +57,8 @@ public static Scene scene() {
     for(int i = 0; i < gameTime; i++) {
         objs tmp = new objs(info1, info2);
         objs tmp2 = new objs(info1, info2);
-        objsSetting(tmp, 5);
-        objsSetting(tmp2, 5);
+        objsSetting(tmp, 2);
+        objsSetting(tmp2, 2);
         infos_1.add(tmp);
         infos_2.add(tmp2);
         if(i % 2 == 0) {
@@ -70,12 +70,16 @@ public static Scene scene() {
             waste_2.add(tmp4);
         }
     }
+    System.err.println("infos_1: " + infos_1.size());
+    System.err.println("infos_2: " + infos_2.size());
+    System.err.println("waste_1: " + waste_1.size());
+    System.err.println("waste_2: " + waste_2.size());
     Timeline generateInfo = new Timeline();
     Timeline generateWaste = new Timeline();
-    final int[] idx_1 = {9};
-    final int[] idx_2 = {9};
-    final int[] idx_3 = {4};
-    final int[] idx_4 = {4};
+    final int[] idx_1 = {gameTime - 1};
+    final int[] idx_2 = {gameTime - 1};
+    final int[] idx_3 = {gameTime / 2 - 1};
+    final int[] idx_4 = {gameTime / 2 - 1};
     generateInfo.getKeyFrames().add(new KeyFrame(Duration.seconds(1), gnr -> {
         if(end) generateInfo.stop();
         pane.getChildren().addAll(infos_1.get(idx_1[0]), infos_2.get(idx_2[0]));
@@ -124,9 +128,6 @@ public static Scene scene() {
             timerText.setText("Time: " + gameTime);
             if(gameTime <= 5) {
                 timerText.setFill(javafx.scene.paint.Color.RED);
-            }
-            if(score == 100) {
-                end = true;
             }
         }else if(gameTime == 0) {
             end = true;

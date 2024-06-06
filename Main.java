@@ -2,7 +2,7 @@ import java.io.IOException;
 import javafx.application.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -13,21 +13,26 @@ public class Main extends Application{
         Main.stage = stage;
         // scene setting
         VBox center = new VBox();
-        Button startGame = new Button();
-        Button settings = new Button();
+        ImageView startGame = new ImageView("src/startGame.png");
+        ImageView settings = new ImageView("src/settings.png");
+        ImageView exit = new ImageView("src/exit.png");
         center.setAlignment(Pos.CENTER);
-        center.getChildren().addAll(startGame, settings);
+        center.getChildren().addAll(startGame, settings, exit);
         BorderPane pane_main = new BorderPane();
         pane_main.setCenter(center);
-        Scene scene = new Scene(pane_main, 1080, 720);
-
-        startGame.setOnAction(e -> {
-            stage.setScene(dorm.scene(540, 360));
-        });
+        Scene scene = new Scene(pane_main, 1280, 720);
         // stage setting
         stage.setTitle("ncuRPG");
         stage.setScene(scene);
         stage.show();
+
+        startGame.setOnMouseClicked(e -> {
+            stage.setScene(dorm.scene(640, 360));
+        });
+        exit.setOnMouseClicked(e -> {
+            stage.close();
+        });
+
     }
     public static void switchScene(Scene scene) {
         stage.setScene(scene);

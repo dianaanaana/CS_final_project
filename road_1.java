@@ -1,4 +1,3 @@
-import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -12,18 +11,15 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-public class dorm extends Application{
+import javafx.util.Duration;
 
+public class road_1 extends Application{
     static Image mainC = new Image("/src/images/IMG_5414.png");
     static ImageView imageView = new ImageView();
     static Pane move = new Pane();
     static BorderPane pane = new BorderPane();
     static Scene scene = new Scene(pane, 1280, 720);
-
-    
-
     public static Scene scene(double iniX, double iniY) {
-        // movement
         imageView.setTranslateX(iniX - mainC.getWidth()/2);
         imageView.setTranslateY(iniY - mainC.getHeight()/2);
         imageView.setImage(mainC);
@@ -50,7 +46,7 @@ public class dorm extends Application{
                 // right boundary
                 if (targetX + mainC.getWidth() > scene.getWidth()) {
                     System.err.println("Error: ImageView has hit the right boundary!");
-                    Main.switchScene(road_1.scene(0, 360));
+                    Main.switchScene(building_1.scene(640, 720));
                 }
                 // top boundary
                 if (targetY < 0) {
@@ -64,16 +60,17 @@ public class dorm extends Application{
             }
         });
 
-        pane.setTop(new Label("dorm"));
+        pane.setTop(new Label("road_1"));
 
         return scene;
     }
     public void start(Stage stage) {
-        // stage setting
-        stage.setTitle("dorm");
-        stage.setScene(scene(540, 360));
-        stage.show();
-    }
+            // stage setting
+            stage.setTitle("road_1");
+            // csLab
+            stage.setScene(scene(0, 360));
+            stage.show();
+        }
     public static void main(String[] args) {
         launch(args);
     }

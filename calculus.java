@@ -37,8 +37,9 @@ class Obj extends Pane{
 	
 	public void switch_target() {
 		double pos_Y = 45;
-		double pos_X = (double)(Math.random()*720);  //getWidth又變得怪怪的
-		target.setWidth((int) (Math.random()*9)*50+50);
+		double tmp = (Math.random()*9)*50+50;
+		target.setWidth((int) tmp);
+		double pos_X = (double)(Math.random()*1280 - tmp);  //getWidth又變得怪怪的
 		target.setX(pos_X);
 		target.setY(pos_Y);
 		target.setFill(Color.GREEN);
@@ -64,18 +65,20 @@ class Obj extends Pane{
 
 
 public class calculus extends Application{
+	// static Stage primaryStage;
 	static int score = 100;
 	static int round = 0;
-	
-	public void start(Stage primaryStage) {
-		BorderPane pane = new BorderPane();
+	static BorderPane pane = new BorderPane();
+	static BorderPane pane_ctrler = new BorderPane();
+	static Scene scene = new Scene(pane_ctrler, 1280, 720);
+	static Boolean b2b = false;
+
+	public static Scene scene() {
+		pane_ctrler.setCenter(pane);
 		Obj obj = new Obj();
-		
 		pane.setCenter(obj);
-		
 		Rectangle rectangle = new Rectangle(5,70);
 		pane.getChildren().add(rectangle);
-		
 		final int[] speed= {1};
 		Timeline timeline = new Timeline();
 		KeyFrame keyFrame = new KeyFrame(Duration.millis(1), e ->{
@@ -84,18 +87,13 @@ public class calculus extends Application{
 				speed[0]*=-1;
 			}
 		});
-		
 		timeline.getKeyFrames().add(keyFrame);
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();
-		
-		
 		Label roundLabel = new Label();
-		
 		roundLabel.setText("Round: " + String.valueOf(round));
 		BorderPane.setAlignment(roundLabel, Pos.BOTTOM_CENTER);
 		roundLabel.setFont(new Font(150));
-		
 		Label win_not = new Label();
 		Text score_infoText = new Text("Score :");
 		score_infoText.setFont(new Font(150));
@@ -108,17 +106,10 @@ public class calculus extends Application{
 		BorderPane.setAlignment(score_infoText, Pos.BOTTOM_CENTER);
 		BorderPane.setAlignment(win_not, Pos.CENTER);
 		bottomBox.setAlignment(Pos.BOTTOM_CENTER);
-		
 		VBox vBox = new VBox();
 		vBox.getChildren().addAll(bottomBox, roundLabel);
 		pane.setBottom(vBox);
 		vBox.setAlignment(Pos.BOTTOM_CENTER);
-		
-		Scene scene = new Scene(pane, 1080, 720);
-		primaryStage.setTitle("Calculus");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
 		scene.setOnKeyPressed(e ->{
 			switch(e.getCode()) {
 			case SPACE: 
@@ -136,28 +127,46 @@ public class calculus extends Application{
 				if(round == 10 && score >= 60) {
 					scene.setOnKeyPressed(null);
 					timeline.stop();
-					Scene conclude = Conclude(score, true);
-					primaryStage.setScene(conclude);
+					// Scene conclude = Conclude(score, true);
+					// primaryStage.setScene(conclude);
+					// Main.switchScene(conclude);
+					pane_ctrler.setCenter(Conclude(score, true));
+					b2b = true;
 				} else if(round == 10 && score < 60) {
 					scene.setOnKeyPressed(null);
 					timeline.stop();
-					Scene conclude = Conclude(score, false);
-					primaryStage.setScene(conclude);
+					// Scene conclude = Conclude(score, false);
+					// primaryStage.setScene(conclude);
+					// Main.switchScene(conclude);
+					pane_ctrler.setCenter(Conclude(score, false));
+					b2b = true;
 				} else if(score == 0) {
 					scene.setOnKeyPressed(null);
 					timeline.stop();
-					Scene conclude = Conclude(score, false);
-					primaryStage.setScene(conclude);
+					// Scene conclude = Conclude(score, false);
+					// primaryStage.setScene(conclude);
+					// Main.switchScene(conclude);
+					pane_ctrler.setCenter(Conclude(score, false));
+					b2b = true;
 				}
 				break;
 			}
 		});
-		
-
+		scene.setOnMouseClicked(e -> {
+			if(b2b) Main.switchScene(building_1.scene(0, 360));
+		});
+		return scene;
+	}
+	
+	public void start(Stage primaryStage) {
+		// this.primaryStage = primaryStage;
+		primaryStage.setTitle("Calculus");
+		primaryStage.setScene(scene());
+		primaryStage.show();
 	}
 	
 	
-	public Scene Conclude(int score, boolean pass) {
+	static public BorderPane Conclude(int score, boolean pass) {
 		BorderPane pane = new BorderPane();
 		Text result = new Text();
 		Text scoreText = new Text("Your Score: "+String.valueOf(score));
@@ -174,10 +183,8 @@ public class calculus extends Application{
 		show_result.getChildren().addAll(result, scoreText);
 		show_result.setAlignment(Pos.CENTER);
 		pane.setCenter(show_result);
-		
-		
-		Scene scene = new Scene(pane, 1080, 720);
-		return scene;
+		// Scene scene = new Scene(pane, 1280, 720);
+		return pane;
 	}
 	
 	public static void main(String[] args) {

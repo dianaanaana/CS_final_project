@@ -61,7 +61,7 @@ public class Engineer extends Application{
 		pane.setCenter(scoreText);
 		BorderPane.setAlignment(scoreText, Pos.CENTER);
 		
-		Scene scene = new Scene(pane, 1080, 720);
+		Scene scene = new Scene(pane, 1280, 720);
 		return scene;
 	}
 	
@@ -88,7 +88,7 @@ public class Engineer extends Application{
 		scoreLabel.setFont(new Font(75));
 		score_infoText.setFont(new Font(75));
 		
-		Scene scene = new Scene(pane, 1080, 720);
+		Scene scene = new Scene(pane, 1280, 720);
 		primaryStage.setTitle("Engineer");
 		primaryStage.setScene(scene);
 		primaryStage.show();
