@@ -84,7 +84,7 @@ public class computerScience extends Application {
         StackPane root = new StackPane();
         root.getChildren().addAll(imageView, content);
 
-        Scene scene = new Scene(root, 1080, 720);
+        Scene scene = new Scene(root, 1280, 720);
 
         primaryStage.setTitle("predict");
         primaryStage.setScene(scene);
