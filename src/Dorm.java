@@ -12,9 +12,10 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-public class dorm extends Application{
 
-    static Image mainC = new Image("/src/images/IMG_5414.png");
+public class Dorm extends Application{
+
+    static Image mainC = new Image("/resources/images/IMG_5414.png");
     static ImageView imageView = new ImageView();
     static Pane move = new Pane();
     static BorderPane pane = new BorderPane();
@@ -50,7 +51,7 @@ public class dorm extends Application{
                 // right boundary
                 if (targetX + mainC.getWidth() > scene.getWidth()) {
                     System.err.println("Error: ImageView has hit the right boundary!");
-                    Main.switchScene(road_1.scene(0, 360));
+                    Main.switchScene(Road_1.scene(0, 360));
                 }
                 // top boundary
                 if (targetY < 0) {

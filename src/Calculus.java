@@ -64,8 +64,7 @@ class Obj extends Pane{
 	}
 }
 
-
-public class calculus extends Application{
+public class Calculus extends Application{
 	// static Stage primaryStage;
 	static int score = 100;
 	static int round = 0;
@@ -192,7 +191,7 @@ public class calculus extends Application{
 			// }
 		});
 		scene.setOnMouseClicked(e -> {
-			if(b2b) Main.switchScene(building_1.scene(0, 360));
+			if(b2b) Main.switchScene(Building_1.scene(0, 360));
 		});
 		return scene;
 	}

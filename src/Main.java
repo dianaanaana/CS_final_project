@@ -1,4 +1,5 @@
 import java.io.IOException;
+
 import javafx.application.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,9 +14,9 @@ public class Main extends Application{
         Main.stage = stage;
         // scene setting
         VBox center = new VBox();
-        ImageView startGame = new ImageView("src/startGame.png");
-        ImageView settings = new ImageView("src/settings.png");
-        ImageView exit = new ImageView("src/exit.png");
+        ImageView startGame = new ImageView("/resources/images/startGame.png");
+        ImageView settings = new ImageView("/resources/images/settings.png");
+        ImageView exit = new ImageView("/resources/images/exit.png");
         center.setAlignment(Pos.CENTER);
         center.getChildren().addAll(startGame, settings, exit);
         BorderPane pane_main = new BorderPane();
@@ -27,7 +28,7 @@ public class Main extends Application{
         stage.show();
 
         startGame.setOnMouseClicked(e -> {
-            stage.setScene(dorm.scene(640, 360));
+            stage.setScene(Dorm.scene(640, 360));
         });
         exit.setOnMouseClicked(e -> {
             stage.close();

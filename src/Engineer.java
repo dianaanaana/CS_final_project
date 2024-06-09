@@ -23,7 +23,7 @@ class Question{
 	
 	public void ReadTopic() throws IOException{
 		String str;
-		FileReader fileReader = new FileReader("src/em.txt");
+		FileReader fileReader = new FileReader("src/resources/docs/em.txt");
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 		
 		while((str = bufferedReader.readLine()) != null) {

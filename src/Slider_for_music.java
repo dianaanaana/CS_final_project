@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class slider_for_music extends Application {
+class Slider_for_music extends Application {
     private MediaPlayer mediaPlayer;
     private Slider volumeSlider;
 

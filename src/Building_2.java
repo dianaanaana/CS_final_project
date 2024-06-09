@@ -4,7 +4,6 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
@@ -13,13 +12,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class road_1 extends Application{
-    static Image mainC = new Image("/src/images/IMG_5414.png");
+public class Building_2 extends Application{
+    static Image mainC = new Image("/resources/images/IMG_5414.png");
     static ImageView imageView = new ImageView();
     static Pane move = new Pane();
     static BorderPane pane = new BorderPane();
     static Scene scene = new Scene(pane, 1280, 720);
     public static Scene scene(double iniX, double iniY) {
+        // movement
         imageView.setTranslateX(iniX - mainC.getWidth()/2);
         imageView.setTranslateY(iniY - mainC.getHeight()/2);
         imageView.setImage(mainC);
@@ -42,11 +42,11 @@ public class road_1 extends Application{
                     // left boundary
                 if (targetX < 0) {
                     System.err.println("Error: ImageView has hit the left boundary!");
+                    // Main.switchScene());
                 }
                 // right boundary
                 if (targetX + mainC.getWidth() > scene.getWidth()) {
                     System.err.println("Error: ImageView has hit the right boundary!");
-                    Main.switchScene(building_1.scene(640, 720));
                 }
                 // top boundary
                 if (targetY < 0) {
@@ -59,16 +59,13 @@ public class road_1 extends Application{
                 });
             }
         });
-
-        pane.setTop(new Label("road_1"));
-
         return scene;
     }
     public void start(Stage stage) {
             // stage setting
-            stage.setTitle("road_1");
-            // csLab
-            stage.setScene(scene(0, 360));
+            stage.setTitle("");
+
+            stage.setScene(scene(640, 720));
             stage.show();
         }
     public static void main(String[] args) {

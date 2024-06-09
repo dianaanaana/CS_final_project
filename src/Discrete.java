@@ -1,4 +1,5 @@
 import java.util.*;
+
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
@@ -30,14 +31,14 @@ class objs extends ImageView {
         this.setImage(gif);
     }
 }
-public class discrete extends Application{
+public class Discrete extends Application{
     static Boolean end = false;
     static int score = 0;
     static Text scoreT = new Text(Integer.toString(score));
-    static Image info1 = new Image("/src/images/info1.png");
-    static Image info2 = new Image("/src/images/info2.gif");
-    static Image bomb1 = new Image("/src/images/bomb1.jpg");
-    static Image bomb2 = new Image("/src/images/bomb2.gif");
+    static Image info1 = new Image("/resources/images/info1.png");
+    static Image info2 = new Image("/resources/images/info2.gif");
+    static Image bomb1 = new Image("/resources/images/bomb1.jpg");
+    static Image bomb2 = new Image("/resources/images/bomb2.gif");
     static BorderPane pane = new BorderPane();
     static Scene scene = new Scene(pane, 1280, 720);
     static int gameTime = 60;

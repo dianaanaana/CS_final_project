@@ -23,7 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class computerScience extends Application {
+public class ComputerScience extends Application {
     ArrayList<String> numbers = new ArrayList<>();
     private int num = 5;
     private Label number;

@@ -12,8 +12,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class building_1 extends Application{
-    static Image mainC = new Image("/src/images/IMG_5414.png");
+public class Building_1 extends Application{
+    static Image mainC = new Image("/resources/images/IMG_5414.png");
     static ImageView imageView = new ImageView();
     static Pane move = new Pane();
     static BorderPane pane = new BorderPane();
@@ -42,17 +42,17 @@ public class building_1 extends Application{
                 // left boundary
             if (targetX < 0) {
                 System.err.println("Error: ImageView has hit the left boundary!");
-                Main.switchScene(calculus.scene());
+                Main.switchScene(Calculus.scene());
             }
             // right boundary
             if (targetX + mainC.getWidth() > scene.getWidth()) {
                 System.err.println("Error: ImageView has hit the right boundary!");
-                Main.switchScene(discrete.scene());
+                Main.switchScene(Discrete.scene());
             }
             // top boundary
             if (targetY < 0) {
                 System.err.println("Error: ImageView has hit the top boundary!");
-                Main.switchScene(building_2.scene(640, 720));
+                Main.switchScene(Building_2.scene(640, 720));
             }
             // bottom boundary
             if (targetY + mainC.getHeight() > scene.getHeight()) {
