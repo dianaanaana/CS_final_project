@@ -15,7 +15,10 @@ import javafx.stage.Stage;
 
 public class Dorm extends Application{
     static Boolean initInvoke = true;
-    static Image mainC = new Image("/resources/images/IMG_5414.png");
+    static Image mainC = new Image("/resources/images/stand_right.png");
+    static Image mainC_left = new Image("/resources/images/stand_left.png");
+    static Image walk_right = new Image("/resources/images/walk_rightv150.gif");
+    static Image walk_left = new Image("/resources/images/walk_leftv150.gif");
     static ImageView imageView = new ImageView();
     static Pane move = new Pane();
     static BorderPane pane = new BorderPane();
@@ -36,35 +39,47 @@ public class Dorm extends Application{
         imageView.setTranslateY(iniY - mainC.getHeight()/2);
         pane.addEventHandler(ContextMenuEvent.CONTEXT_MENU_REQUESTED, new EventHandler<ContextMenuEvent>() {
             public void handle(ContextMenuEvent e) {
+                double oldX = imageView.getTranslateX();
+                double oldY = imageView.getTranslateY();
                 double targetX = e.getSceneX() - mainC.getWidth()/2;
                 double targetY = e.getSceneY() - mainC.getHeight()/2;
                 double distanceX = targetX - imageView.getTranslateX();
                 double distanceY = targetY - imageView.getTranslateY();
                 double distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
                 double duration = distance / 400;
+                if(targetX > oldX){
+                    imageView.setImage(walk_right);
+                }else{
+                    imageView.setImage(walk_left);
+                }
                 Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.ZERO, new KeyValue(imageView.translateXProperty(), imageView.getTranslateX()), new KeyValue(imageView.translateYProperty(), imageView.getTranslateY())),
+                    new KeyFrame(Duration.ZERO, new KeyValue(imageView.translateXProperty(), oldX), new KeyValue(imageView.translateYProperty(), oldY)),
                     new KeyFrame(Duration.seconds(duration), new KeyValue(imageView.translateXProperty(), targetX), new KeyValue(imageView.translateYProperty(), targetY))
                 );
                 timeline.play();
                 timeline.setOnFinished(e2 -> {
+                    if(targetX > oldX){
+                        imageView.setImage(mainC);
+                    }else{
+                        imageView.setImage(mainC_left);
+                    }
                     // left boundary
-                if (targetX < 0) {
-                    System.err.println("Error: ImageView has hit the left boundary!");
-                }
-                // right boundary
-                if (targetX + mainC.getWidth() > scene.getWidth()) {
-                    System.err.println("Error: ImageView has hit the right boundary!");
-                    Main.switchScene(Road_1.scene(0, 360));
-                }
-                // top boundary
-                if (targetY < 0) {
-                    System.err.println("Error: ImageView has hit the top boundary!");
-                }
-                // bottom boundary
-                if (targetY + mainC.getHeight() > scene.getHeight()) {
-                    System.err.println("Error: ImageView has hit the bottom boundary!");
-                }
+                    if (targetX < 0) {
+                        System.err.println("Error: ImageView has hit the left boundary!");
+                    }
+                    // right boundary
+                    if (targetX + mainC.getWidth() > scene.getWidth()) {
+                        System.err.println("Error: ImageView has hit the right boundary!");
+                        Main.switchScene(Road_1.scene(0, 360));
+                    }
+                    // top boundary
+                    if (targetY < 0) {
+                        System.err.println("Error: ImageView has hit the top boundary!");
+                    }
+                    // bottom boundary
+                    if (targetY + mainC.getHeight() > scene.getHeight()) {
+                        System.err.println("Error: ImageView has hit the bottom boundary!");
+                    }
                 });
             }
         });
