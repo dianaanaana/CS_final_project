@@ -191,7 +191,7 @@ public class Calculus extends Application{
 			// }
 		});
 		scene.setOnMouseClicked(e -> {
-			if(b2b) Main.switchScene(Building_1.scene(0, 360));
+			if(b2b) Main.switchScene(Loading.scene(Building_1.scene(0, 360), 2));
 		});
 		return scene;
 	}
