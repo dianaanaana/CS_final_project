@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -18,12 +19,15 @@ public class Building_1 extends Application{
     static Image mainC_left = new Image("/resources/images/stand_left.png");
     static Image walk_right = new Image("/resources/images/walk_rightv150.gif");
     static Image walk_left = new Image("/resources/images/walk_leftv150.gif");
+    static Image bg = new Image("resources/images/building1.png");
     static ImageView imageView = new ImageView();
     static Pane move = new Pane();
     static BorderPane pane = new BorderPane();
-    static Scene scene = new Scene(pane, 1280, 720);
+    static StackPane stackPane = new StackPane();
+    static Scene scene = new Scene(stackPane, 1280, 720);
     public static Scene scene(int iniX, int iniY) {
         if (initInvoke) {
+            stackPane.getChildren().addAll(new ImageView(bg), pane);
             imageView.setImage(mainC);
             move.getChildren().add(imageView);
             pane.setCenter(move);
@@ -38,6 +42,7 @@ public class Building_1 extends Application{
             double oldY = imageView.getTranslateY();
             double targetX = e.getSceneX() - mainC.getWidth()/2;
             double targetY = e.getSceneY() - mainC.getHeight()/2;
+            System.err.println("targetX: " + targetX + ", targetY: " + targetY);
             double distanceX = targetX - imageView.getTranslateX();
             double distanceY = targetY - imageView.getTranslateY();
             double distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
@@ -71,11 +76,12 @@ public class Building_1 extends Application{
                 // top boundary
                 if (targetY < 0) {
                     System.err.println("Error: ImageView has hit the top boundary!");
-                    Main.switchScene(Loading.scene(Building_2.scene(640, 720), 2));
+                    Main.switchScene(Loading.scene(Building_2.scene(600, 640), 2));
                 }
                 // bottom boundary
                 if (targetY + mainC.getHeight() > scene.getHeight()) {
                     System.err.println("Error: ImageView has hit the bottom boundary!");
+                    Main.switchScene(Loading.scene(Road_1.scene(1280, 360), 2));
                 }
             });
         }

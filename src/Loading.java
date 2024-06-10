@@ -1,3 +1,6 @@
+import java.util.Stack;
+
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
@@ -8,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -35,10 +39,17 @@ public class Loading extends Application {
     static Image[] loadingTexts = new Image[4];
     static ImageView loadingText = new ImageView();
     static VBox vBox = new VBox();
+    static ImageView bg = new ImageView("/resources/images/LoadingBG.png");
 
     static BorderPane pane = new BorderPane();
-    static Scene scene = new Scene(pane, 1280, 720);
+    static StackPane stackPane = new StackPane();
+    static Scene scene = new Scene(stackPane, 1280, 720);
     public static Scene scene(Scene nextScene, int duration) {
+        stackPane.getChildren().addAll(bg, pane);
+		FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), bg);
+        fadeOut.setFromValue(0.5);
+        fadeOut.setToValue(0.5);
+		fadeOut.play();
         if(initInvoke) {
             images[0] = new Image("/resources/images/shih.png");
             images[1] = new Image("/resources/images/pepsi.png");
@@ -46,6 +57,7 @@ public class Loading extends Application {
             loadingTexts[1] = new Image("/resources/images/Loading1.png");
             loadingTexts[2] = new Image("/resources/images/Loading2.png");
             loadingTexts[3] = new Image("/resources/images/Loading3.png");
+
             vBox.getChildren().addAll(loadingIcon, loadingText);
             pane.setCenter(vBox);
             vBox.setAlignment(Pos.CENTER);

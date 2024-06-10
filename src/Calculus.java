@@ -1,3 +1,6 @@
+import java.util.Stack;
+
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -5,10 +8,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -68,13 +74,20 @@ public class Calculus extends Application{
 	// static Stage primaryStage;
 	static int score = 100;
 	static int round = 0;
+	static ImageView bg = new ImageView(new Image("resources/images/classroom.png"));
 	static BorderPane pane = new BorderPane();
+	static StackPane stackPane = new StackPane();
 	static BorderPane pane_ctrler = new BorderPane();
 	static Scene scene = new Scene(pane_ctrler, 1280, 720);
 	static Boolean b2b = false;
 
 	public static Scene scene() {
-		pane_ctrler.setCenter(pane);
+		stackPane.getChildren().addAll(bg, pane);
+		pane_ctrler.setCenter(stackPane);
+		FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), bg);
+        fadeOut.setFromValue(0.5);
+        fadeOut.setToValue(0.5);
+		fadeOut.play();
 		Obj obj = new Obj();
 		pane.setCenter(obj);
 		Rectangle rectangle = new Rectangle(5,70);
@@ -92,10 +105,13 @@ public class Calculus extends Application{
 		timeline.play();
 		Label roundLabel = new Label();
 		roundLabel.setText("Round: " + String.valueOf(round));
+		roundLabel.setTextFill(Color.BLACK);
 		BorderPane.setAlignment(roundLabel, Pos.BOTTOM_CENTER);
 		roundLabel.setFont(new Font(150));
 		Label win_not = new Label();
+		win_not.setTextFill(Color.BLACK);
 		Text score_infoText = new Text("Score :");
+		score_infoText.setFill(Color.BLACK);
 		score_infoText.setFont(new Font(150));
 		win_not.setFont(new Font(150));
 		HBox bottomBox = new HBox(5) ;

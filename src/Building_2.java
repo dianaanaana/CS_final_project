@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -9,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -18,12 +21,15 @@ public class Building_2 extends Application{
     static Image mainC_left = new Image("/resources/images/stand_left.png");
     static Image walk_right = new Image("/resources/images/walk_rightv150.gif");
     static Image walk_left = new Image("/resources/images/walk_leftv150.gif");
+    static Image bg = new Image("resources/images/building2.png");
     static ImageView imageView = new ImageView();
     static Pane move = new Pane();
     static BorderPane pane = new BorderPane();
-    static Scene scene = new Scene(pane, 1280, 720);
+    static StackPane stackPane = new StackPane();
+    static Scene scene = new Scene(stackPane, 1280, 720);
     public static Scene scene(double iniX, double iniY) {
         if (initInvoke) {
+            stackPane.getChildren().addAll(new ImageView(bg), pane);
             imageView.setImage(mainC);
             move.getChildren().add(imageView);
             pane.setCenter(move);
@@ -74,7 +80,7 @@ public class Building_2 extends Application{
                     // bottom boundary
                     if (targetY + mainC.getHeight() > scene.getHeight()) {
                         System.err.println("Error: ImageView has hit the bottom boundary!");
-                        Main.switchScene(Loading.scene(Building_1.scene(640, 0), 2));
+                        Main.switchScene(Loading.scene(Building_1.scene(600, 280), 2));
                     }
                 });
             }
