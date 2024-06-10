@@ -14,7 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Dorm extends Application{
-
+    static Boolean initInvoke = true;
     static Image mainC = new Image("/resources/images/IMG_5414.png");
     static ImageView imageView = new ImageView();
     static Pane move = new Pane();
@@ -24,12 +24,16 @@ public class Dorm extends Application{
     
 
     public static Scene scene(double iniX, double iniY) {
+        if (initInvoke) {
+            imageView.setImage(mainC);
+            move.getChildren().add(imageView);
+            pane.setCenter(move);
+            initInvoke = false;
+        }
+
         // movement
         imageView.setTranslateX(iniX - mainC.getWidth()/2);
         imageView.setTranslateY(iniY - mainC.getHeight()/2);
-        imageView.setImage(mainC);
-        move.getChildren().add(imageView);
-        pane.setCenter(move);
         pane.addEventHandler(ContextMenuEvent.CONTEXT_MENU_REQUESTED, new EventHandler<ContextMenuEvent>() {
             public void handle(ContextMenuEvent e) {
                 double targetX = e.getSceneX() - mainC.getWidth()/2;
