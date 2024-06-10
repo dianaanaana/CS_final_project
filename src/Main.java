@@ -24,11 +24,11 @@ public class Main extends Application{
         Scene scene = new Scene(pane_main, 1280, 720);
         // stage setting
         stage.setTitle("ncuRPG");
-        stage.setScene(scene);
+        stage.setScene(Loading.scene(scene, 10));
         stage.show();
 
         startGame.setOnMouseClicked(e -> {
-            stage.setScene(Dorm.scene(640, 360));
+            stage.setScene(Loading.scene(Dorm.scene(640, 360), 2));
         });
         exit.setOnMouseClicked(e -> {
             stage.close();
