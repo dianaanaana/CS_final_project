@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -32,15 +33,20 @@ class objs extends ImageView {
     }
 }
 public class Discrete extends Application{
+    static Boolean start = false;
     static Boolean end = false;
+    static Boolean b2b = false;
     static int score = 0;
     static Text scoreT = new Text(Integer.toString(score));
+    static ImageView startGame = new ImageView("resources/images/ss.png");
     static Image info1 = new Image("/resources/images/info1.png");
     static Image info2 = new Image("/resources/images/info2.gif");
     static Image bomb1 = new Image("/resources/images/bomb1.jpg");
     static Image bomb2 = new Image("/resources/images/bomb2.gif");
+    static BorderPane pane_start = new BorderPane();
     static BorderPane pane = new BorderPane();
-    static Scene scene = new Scene(pane, 1280, 720);
+    static BorderPane pane_ctrler = new BorderPane();
+    static Scene scene = new Scene(pane_ctrler, 1280, 720);
     static int gameTime = 60;
     static Text timerText = new Text();
     static int[][][] positions = {
@@ -49,12 +55,16 @@ public class Discrete extends Application{
         {{0, 720}, {160, 720}, {320, 720}, {480, 720}, {640, 720}, {800, 720}, {960, 720}, {1120, 720}, {1280, 720},
          {1080, 120}, {1080, 240}, {1080, 360}, {1080, 480}, {1080, 600}}
     };
+    static ArrayList<objs> infos_1 = new ArrayList<>();
+    static ArrayList<objs> infos_2 = new ArrayList<>();
+    static ArrayList<objs> waste_1 = new ArrayList<>();
+    static ArrayList<objs> waste_2 = new ArrayList<>();
 public static Scene scene() {
-    // infos
-    ArrayList<objs> infos_1 = new ArrayList<>();
-    ArrayList<objs> infos_2 = new ArrayList<>();
-    ArrayList<objs> waste_1 = new ArrayList<>();
-    ArrayList<objs> waste_2 = new ArrayList<>();
+    pane_ctrler.setCenter(pane_start);
+    pane_start.setCenter(startGame);
+    
+    
+    // infos and wastes
     for(int i = 0; i < gameTime; i++) {
         objs tmp = new objs(info1, info2);
         objs tmp2 = new objs(info1, info2);
@@ -111,9 +121,9 @@ public static Scene scene() {
     
     }));
     generateInfo.setCycleCount(gameTime);
-    generateInfo.play();
+    // generateInfo.play();
     generateWaste.setCycleCount(gameTime / 2);
-    generateWaste.play();
+    // generateWaste.play();
     // score
     scoreT.setFont(new Font(75));
     pane.setTop(scoreT);
@@ -136,12 +146,27 @@ public static Scene scene() {
             
         }else if(gameTime <= -3) {
             System.err.println("times up!");
+            pane_ctrler.setCenter(conclude());
+            b2b = true;
         }
     }));
     timer.setCycleCount(gameTime+3);
-    timer.play();
+    // timer.play();
     pane.setBottom(timerText);
     BorderPane.setAlignment(timerText, Pos.TOP_CENTER);
+    startGame.setOnMouseClicked(e -> {
+        pane_ctrler.setCenter(pane);
+        start = true;
+        if(start) {
+            generateInfo.play();
+            generateWaste.play();
+            timer.play();
+        }
+    });
+    
+    scene.setOnMouseClicked(e -> {
+        if(b2b) Main.switchScene(Loading.scene(Building_1.scene(1280, 360), 2));
+    });
     return scene;
 }
 private static void objsSetting(objs obj, int s) {
@@ -193,6 +218,28 @@ public static void printHeapStats() {
     System.err.println("Allocated memory: " + allocatedMemory / (1024 * 1024) + "MB");
     System.err.println("Free memory: " + freeMemory / (1024 * 1024) + "MB");
     System.err.println("Used memory: " + (allocatedMemory - freeMemory) / (1024 * 1024) + "MB");
+}
+public static BorderPane conclude() {
+    BorderPane pane = new BorderPane();
+		Text result = new Text();
+		if(score >= 60) {
+			result.setText("Pass!");
+            if(score > 100) score = 100;
+		} else {
+			result.setText("Fail!");
+            if(score < 0) score = 0;
+		}
+        Text scoreText = new Text("Your Score: "+String.valueOf(score));
+		result.setFont(new Font(150));
+		scoreText.setFont(new Font(150));
+		BorderPane.setAlignment(result, Pos.CENTER);
+		BorderPane.setAlignment(scoreText, Pos.CENTER);
+		VBox show_result = new VBox(5);
+		show_result.getChildren().addAll(result, scoreText);
+		show_result.setAlignment(Pos.CENTER);
+		pane.setCenter(show_result);
+		// Scene scene = new Scene(pane, 1280, 720);
+		return pane;
 }
 public void start(Stage stage) {
         // stage setting
