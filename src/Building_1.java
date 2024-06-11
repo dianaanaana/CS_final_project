@@ -81,7 +81,7 @@ public class Building_1 extends Application{
                 // bottom boundary
                 if (targetY + mainC.getHeight() > scene.getHeight()) {
                     System.err.println("Error: ImageView has hit the bottom boundary!");
-                    Main.switchScene(Loading.scene(Road_1.scene(1280, 360), 2));
+                    Main.switchScene(Loading.scene(Road.scene(1280, 360), 2));
                 }
             });
         }

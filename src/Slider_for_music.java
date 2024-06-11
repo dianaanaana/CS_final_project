@@ -33,17 +33,17 @@ public class Slider_for_music extends Application {
 
         b1.setOnAction(event -> {
             System.out.println("1");
-            playMusic(new File("src/resource/music/a.mp3").toURI().toString());
+            playMusic(new File("src/resources/musics/a.mp3").toURI().toString());
         });
 
         b2.setOnAction(event -> {
             System.out.println("2");
-            playMusic(new File("src/resource/music/b.mp3").toURI().toString());
+            playMusic(new File("src/resources/musics/b.mp3").toURI().toString());
         });
 
         b3.setOnAction(event -> {
             System.out.println("3");
-            playMusic(new File("src/resource/music/c.mp3").toURI().toString());
+            playMusic(new File("src/resources/musics/c.mp3").toURI().toString());
         });
 
         VBox musicVbox = new VBox();

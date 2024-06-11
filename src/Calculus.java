@@ -1,5 +1,3 @@
-import java.util.Stack;
-
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
