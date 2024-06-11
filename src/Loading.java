@@ -32,8 +32,8 @@ class LoadingIcon extends ImageView {
 
 
 public class Loading extends Application {
-    static int duration;
     static Boolean initInvoke = true;
+    static int duration;
     static Image[] images = new Image[2];
     static LoadingIcon loadingIcon = new LoadingIcon(duration);
     static Image[] loadingTexts = new Image[4];
@@ -45,11 +45,7 @@ public class Loading extends Application {
     static StackPane stackPane = new StackPane();
     static Scene scene = new Scene(stackPane, 1280, 720);
     public static Scene scene(Scene nextScene, int duration) {
-        stackPane.getChildren().addAll(bg, pane);
-		FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), bg);
-        fadeOut.setFromValue(0.5);
-        fadeOut.setToValue(0.5);
-		fadeOut.play();
+        
         if(initInvoke) {
             images[0] = new Image("/resources/images/shih.png");
             images[1] = new Image("/resources/images/pepsi.png");
@@ -57,10 +53,14 @@ public class Loading extends Application {
             loadingTexts[1] = new Image("/resources/images/Loading1.png");
             loadingTexts[2] = new Image("/resources/images/Loading2.png");
             loadingTexts[3] = new Image("/resources/images/Loading3.png");
-
             vBox.getChildren().addAll(loadingIcon, loadingText);
             pane.setCenter(vBox);
             vBox.setAlignment(Pos.CENTER);
+            stackPane.getChildren().addAll(bg, pane);
+            FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), bg);
+            fadeOut.setFromValue(0.5);
+            fadeOut.setToValue(0.5);
+            fadeOut.play();
             // BorderPane.setAlignment(vBox, Pos.CENTER);
             initInvoke = false;
         }
