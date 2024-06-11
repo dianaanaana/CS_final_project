@@ -68,10 +68,15 @@ public class Building_2 extends Application{
                     if (targetX < 0) {
                         System.err.println("Error: ImageView has hit the left boundary!");
                         // Main.switchScene(Loading.scene(Engineer.scene(), 2));
+                        // Engineerv0.main(new String[0]);
+                        Engineerv2 app = new Engineerv2();
+                        app.startApplication(new String[0]);
                     }
                     // right boundary
                     if (targetX + mainC.getWidth() > scene.getWidth()) {
                         System.err.println("Error: ImageView has hit the right boundary!");
+                        ComputerScience app = new ComputerScience();
+                        app.startApplication(new String[0]);
                     }
                     // top boundary
                     if (targetY < 0) {
@@ -93,7 +98,7 @@ public class Building_2 extends Application{
 
             stage.setScene(scene(640, 720));
             stage.show();
-        }
+    }
     public static void main(String[] args) {
         launch(args);
     }
