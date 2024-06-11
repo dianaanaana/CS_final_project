@@ -59,168 +59,168 @@ public class Discrete extends Application{
     static ArrayList<objs> infos_2 = new ArrayList<>();
     static ArrayList<objs> waste_1 = new ArrayList<>();
     static ArrayList<objs> waste_2 = new ArrayList<>();
-public static Scene scene() {
-    pane_ctrler.setCenter(pane_start);
-    pane_start.setCenter(startGame);
-    
-    
-    // infos and wastes
-    for(int i = 0; i < gameTime; i++) {
-        objs tmp = new objs(info1, info2);
-        objs tmp2 = new objs(info1, info2);
-        objsSetting(tmp, 2);
-        objsSetting(tmp2, 2);
-        infos_1.add(tmp);
-        infos_2.add(tmp2);
-        if(i % 2 == 0) {
-            objs tmp3 = new objs(bomb1, bomb2);
-            objs tmp4 = new objs(bomb1, bomb2);
-            objsSetting(tmp3, -10);
-            objsSetting(tmp4, -10);
-            waste_1.add(tmp3);
-            waste_2.add(tmp4);
-        }
-    }
-    System.err.println("infos_1: " + infos_1.size());
-    System.err.println("infos_2: " + infos_2.size());
-    System.err.println("waste_1: " + waste_1.size());
-    System.err.println("waste_2: " + waste_2.size());
-    Timeline generateInfo = new Timeline();
-    Timeline generateWaste = new Timeline();
-    final int[] idx_1 = {gameTime - 1};
-    final int[] idx_2 = {gameTime - 1};
-    final int[] idx_3 = {gameTime / 2 - 1};
-    final int[] idx_4 = {gameTime / 2 - 1};
-    generateInfo.getKeyFrames().add(new KeyFrame(Duration.seconds(1), gnr -> {
-        if(end) generateInfo.stop();
-        pane.getChildren().addAll(infos_1.get(idx_1[0]), infos_2.get(idx_2[0]));
-        infos_1.get(idx_1[0]).setTranslateX(positions[0][infos_1.get(idx_1[0]).start][0] - infos_1.get(idx_1[0]).getFitWidth() / 2);
-        infos_1.get(idx_1[0]).setTranslateY(positions[0][infos_1.get(idx_1[0]).start][1] - infos_1.get(idx_1[0]).getFitHeight() / 2);
-        infos_2.get(idx_2[0]).setTranslateX(positions[1][infos_2.get(idx_2[0]).start][0] - infos_2.get(idx_2[0]).getFitWidth() / 2);
-        infos_2.get(idx_2[0]).setTranslateY(positions[1][infos_2.get(idx_2[0]).start][1] - infos_2.get(idx_2[0]).getFitHeight() / 2);
-        movement(infos_1.get(idx_1[0]), 1, rdn_2to4());
-        movement(infos_2.get(idx_2[0]), 0, rdn_2to4());
-        infos_1.remove(idx_1[0]);
-        infos_2.remove(idx_2[0]);
-        idx_1[0]--;
-        idx_2[0]--;
-    }));
-    generateWaste.getKeyFrames().add(new KeyFrame(Duration.seconds(2), gnr -> {
-        if(end) generateWaste.stop();
-        pane.getChildren().addAll(waste_1.get(idx_3[0]), waste_2.get(idx_4[0]));
-        waste_1.get(idx_3[0]).setTranslateX(positions[0][waste_1.get(idx_3[0]).start][0] - waste_1.get(idx_3[0]).getFitWidth() / 2);
-        waste_1.get(idx_3[0]).setTranslateY(positions[0][waste_1.get(idx_3[0]).start][1] - waste_1.get(idx_3[0]).getFitHeight() / 2);
-        waste_2.get(idx_4[0]).setTranslateX(positions[1][waste_2.get(idx_4[0]).start][0] - waste_2.get(idx_4[0]).getFitWidth() / 2);
-        waste_2.get(idx_4[0]).setTranslateY(positions[1][waste_2.get(idx_4[0]).start][1] - waste_2.get(idx_4[0]).getFitHeight() / 2);
-        movement(waste_1.get(idx_3[0]), 1, rdn_5to7());
-        movement(waste_2.get(idx_4[0]), 0, rdn_5to7());
-        waste_1.remove(idx_3[0]);
-        waste_2.remove(idx_4[0]);
-        idx_3[0]--;
-        idx_4[0]--;
-    
-    }));
-    generateInfo.setCycleCount(gameTime);
-    // generateInfo.play();
-    generateWaste.setCycleCount(gameTime / 2);
-    // generateWaste.play();
-    // score
-    scoreT.setFont(new Font(75));
-    pane.setTop(scoreT);
-    BorderPane.setAlignment(scoreT, Pos.TOP_CENTER);
-    // Timer
-    Timeline timer = new Timeline();
-    timerText.setText("Time: " + gameTime);
-    timerText.setFont(new Font(100));
-    timer.getKeyFrames().add(new KeyFrame(Duration.seconds(1), e -> {
-        printHeapStats();
-        gameTime--;
-        if (gameTime > 0) {
-            timerText.setText("Time: " + gameTime);
-            if(gameTime <= 5) {
-                timerText.setFill(javafx.scene.paint.Color.RED);
+    public static Scene scene() {
+        pane_ctrler.setCenter(pane_start);
+        pane_start.setCenter(startGame);
+        
+        
+        // infos and wastes
+        for(int i = 0; i < gameTime; i++) {
+            objs tmp = new objs(info1, info2);
+            objs tmp2 = new objs(info1, info2);
+            objsSetting(tmp, 2);
+            objsSetting(tmp2, 2);
+            infos_1.add(tmp);
+            infos_2.add(tmp2);
+            if(i % 2 == 0) {
+                objs tmp3 = new objs(bomb1, bomb2);
+                objs tmp4 = new objs(bomb1, bomb2);
+                objsSetting(tmp3, -10);
+                objsSetting(tmp4, -10);
+                waste_1.add(tmp3);
+                waste_2.add(tmp4);
             }
-        }else if(gameTime == 0) {
-            end = true;
-            timerText.setText("時間到！");
-            
-        }else if(gameTime <= -3) {
-            System.err.println("times up!");
-            pane_ctrler.setCenter(conclude());
-            b2b = true;
         }
-    }));
-    timer.setCycleCount(gameTime+3);
-    // timer.play();
-    pane.setBottom(timerText);
-    BorderPane.setAlignment(timerText, Pos.TOP_CENTER);
-    startGame.setOnMouseClicked(e -> {
-        pane_ctrler.setCenter(pane);
-        start = true;
-        if(start) {
-            generateInfo.play();
-            generateWaste.play();
-            timer.play();
-        }
-    });
-    
-    scene.setOnMouseClicked(e -> {
-        if(b2b) Main.switchScene(Loading.scene(Building_1.scene(1280, 360), 2));
-    });
-    return scene;
-}
-private static void objsSetting(objs obj, int s) {
-    obj.start = rdn_14();
-    obj.end = rdn_14();
-    obj.setOnMouseClicked(e -> {
-        obj.changeImage();
-        if(!obj.isScored && !end) {
-            score += s;
-            scoreT.setText(Integer.toString(score));
-        }
-        obj.isScored = true;
-        Timeline vanish = new Timeline();
-        vanish.getKeyFrames().add(new KeyFrame(Duration.seconds(1), v -> {
-            pane.getChildren().remove(obj);
-
+        System.err.println("infos_1: " + infos_1.size());
+        System.err.println("infos_2: " + infos_2.size());
+        System.err.println("waste_1: " + waste_1.size());
+        System.err.println("waste_2: " + waste_2.size());
+        Timeline generateInfo = new Timeline();
+        Timeline generateWaste = new Timeline();
+        final int[] idx_1 = {gameTime - 1};
+        final int[] idx_2 = {gameTime - 1};
+        final int[] idx_3 = {gameTime / 2 - 1};
+        final int[] idx_4 = {gameTime / 2 - 1};
+        generateInfo.getKeyFrames().add(new KeyFrame(Duration.seconds(1), gnr -> {
+            if(end) generateInfo.stop();
+            pane.getChildren().addAll(infos_1.get(idx_1[0]), infos_2.get(idx_2[0]));
+            infos_1.get(idx_1[0]).setTranslateX(positions[0][infos_1.get(idx_1[0]).start][0] - infos_1.get(idx_1[0]).getFitWidth() / 2);
+            infos_1.get(idx_1[0]).setTranslateY(positions[0][infos_1.get(idx_1[0]).start][1] - infos_1.get(idx_1[0]).getFitHeight() / 2);
+            infos_2.get(idx_2[0]).setTranslateX(positions[1][infos_2.get(idx_2[0]).start][0] - infos_2.get(idx_2[0]).getFitWidth() / 2);
+            infos_2.get(idx_2[0]).setTranslateY(positions[1][infos_2.get(idx_2[0]).start][1] - infos_2.get(idx_2[0]).getFitHeight() / 2);
+            movement(infos_1.get(idx_1[0]), 1, rdn_2to4());
+            movement(infos_2.get(idx_2[0]), 0, rdn_2to4());
+            infos_1.remove(idx_1[0]);
+            infos_2.remove(idx_2[0]);
+            idx_1[0]--;
+            idx_2[0]--;
         }));
-        vanish.setCycleCount(1);
-        vanish.play();
-    });
-}
-private static void movement(objs obj, int e, int s) {
-    Timeline move = new Timeline(
-        new KeyFrame(Duration.ZERO, new KeyValue(obj.translateXProperty(), obj.getTranslateX()), new KeyValue(obj.translateYProperty(), obj.getTranslateY())),
-        new KeyFrame(Duration.seconds(s), new KeyValue(obj.translateXProperty(), positions[e][obj.end][0] - obj.getFitWidth() / 2), new KeyValue(obj.translateYProperty(), positions[e][obj.end][1]- obj.getFitHeight() / 2))
-    );
-    move.play();
-    move.setOnFinished(eMove -> {
-        pane.getChildren().remove(obj);
-    });
-}
-private static int rdn_14() {
-    return (int)(Math.random() * 14);
-}
-private static int rdn_2to4() {
-    return (int)(Math.random() * 3) + 2;
-}
-private static int rdn_5to7() {
-    return (int)(Math.random() * 3) + 5;
-}
-public static void printHeapStats() {
-    Runtime runtime = Runtime.getRuntime();
+        generateWaste.getKeyFrames().add(new KeyFrame(Duration.seconds(2), gnr -> {
+            if(end) generateWaste.stop();
+            pane.getChildren().addAll(waste_1.get(idx_3[0]), waste_2.get(idx_4[0]));
+            waste_1.get(idx_3[0]).setTranslateX(positions[0][waste_1.get(idx_3[0]).start][0] - waste_1.get(idx_3[0]).getFitWidth() / 2);
+            waste_1.get(idx_3[0]).setTranslateY(positions[0][waste_1.get(idx_3[0]).start][1] - waste_1.get(idx_3[0]).getFitHeight() / 2);
+            waste_2.get(idx_4[0]).setTranslateX(positions[1][waste_2.get(idx_4[0]).start][0] - waste_2.get(idx_4[0]).getFitWidth() / 2);
+            waste_2.get(idx_4[0]).setTranslateY(positions[1][waste_2.get(idx_4[0]).start][1] - waste_2.get(idx_4[0]).getFitHeight() / 2);
+            movement(waste_1.get(idx_3[0]), 1, rdn_5to7());
+            movement(waste_2.get(idx_4[0]), 0, rdn_5to7());
+            waste_1.remove(idx_3[0]);
+            waste_2.remove(idx_4[0]);
+            idx_3[0]--;
+            idx_4[0]--;
+        
+        }));
+        generateInfo.setCycleCount(gameTime);
+        // generateInfo.play();
+        generateWaste.setCycleCount(gameTime / 2);
+        // generateWaste.play();
+        // score
+        scoreT.setFont(new Font(75));
+        pane.setTop(scoreT);
+        BorderPane.setAlignment(scoreT, Pos.TOP_CENTER);
+        // Timer
+        Timeline timer = new Timeline();
+        timerText.setText("Time: " + gameTime);
+        timerText.setFont(new Font(100));
+        timer.getKeyFrames().add(new KeyFrame(Duration.seconds(1), e -> {
+            printHeapStats();
+            gameTime--;
+            if (gameTime > 0) {
+                timerText.setText("Time: " + gameTime);
+                if(gameTime <= 5) {
+                    timerText.setFill(javafx.scene.paint.Color.RED);
+                }
+            }else if(gameTime == 0) {
+                end = true;
+                timerText.setText("時間到！");
+                
+            }else if(gameTime <= -3) {
+                System.err.println("times up!");
+                pane_ctrler.setCenter(conclude());
+                b2b = true;
+            }
+        }));
+        timer.setCycleCount(gameTime+3);
+        // timer.play();
+        pane.setBottom(timerText);
+        BorderPane.setAlignment(timerText, Pos.TOP_CENTER);
+        startGame.setOnMouseClicked(e -> {
+            pane_ctrler.setCenter(pane);
+            start = true;
+            if(start) {
+                generateInfo.play();
+                generateWaste.play();
+                timer.play();
+            }
+        });
+        
+        scene.setOnMouseClicked(e -> {
+            if(b2b) Main.switchScene(Loading.scene(Building_1.scene(1280, 360), 2));
+        });
+        return scene;
+    }
+    private static void objsSetting(objs obj, int s) {
+        obj.start = rdn_14();
+        obj.end = rdn_14();
+        obj.setOnMouseClicked(e -> {
+            obj.changeImage();
+            if(!obj.isScored && !end) {
+                score += s;
+                scoreT.setText(Integer.toString(score));
+            }
+            obj.isScored = true;
+            Timeline vanish = new Timeline();
+            vanish.getKeyFrames().add(new KeyFrame(Duration.seconds(1), v -> {
+                pane.getChildren().remove(obj);
 
-    long maxMemory = runtime.maxMemory();
-    long allocatedMemory = runtime.totalMemory();
-    long freeMemory = runtime.freeMemory();
+            }));
+            vanish.setCycleCount(1);
+            vanish.play();
+        });
+    }
+    private static void movement(objs obj, int e, int s) {
+        Timeline move = new Timeline(
+            new KeyFrame(Duration.ZERO, new KeyValue(obj.translateXProperty(), obj.getTranslateX()), new KeyValue(obj.translateYProperty(), obj.getTranslateY())),
+            new KeyFrame(Duration.seconds(s), new KeyValue(obj.translateXProperty(), positions[e][obj.end][0] - obj.getFitWidth() / 2), new KeyValue(obj.translateYProperty(), positions[e][obj.end][1]- obj.getFitHeight() / 2))
+        );
+        move.play();
+        move.setOnFinished(eMove -> {
+            pane.getChildren().remove(obj);
+        });
+    }
+    private static int rdn_14() {
+        return (int)(Math.random() * 14);
+    }
+    private static int rdn_2to4() {
+        return (int)(Math.random() * 3) + 2;
+    }
+    private static int rdn_5to7() {
+        return (int)(Math.random() * 3) + 5;
+    }
+    public static void printHeapStats() {
+        Runtime runtime = Runtime.getRuntime();
 
-    System.err.println("Max memory: " + maxMemory / (1024 * 1024) + "MB");
-    System.err.println("Allocated memory: " + allocatedMemory / (1024 * 1024) + "MB");
-    System.err.println("Free memory: " + freeMemory / (1024 * 1024) + "MB");
-    System.err.println("Used memory: " + (allocatedMemory - freeMemory) / (1024 * 1024) + "MB");
-}
-public static BorderPane conclude() {
-    BorderPane pane = new BorderPane();
+        long maxMemory = runtime.maxMemory();
+        long allocatedMemory = runtime.totalMemory();
+        long freeMemory = runtime.freeMemory();
+
+        System.err.println("Max memory: " + maxMemory / (1024 * 1024) + "MB");
+        System.err.println("Allocated memory: " + allocatedMemory / (1024 * 1024) + "MB");
+        System.err.println("Free memory: " + freeMemory / (1024 * 1024) + "MB");
+        System.err.println("Used memory: " + (allocatedMemory - freeMemory) / (1024 * 1024) + "MB");
+    }
+    public static BorderPane conclude() {
+        BorderPane pane = new BorderPane();
 		Text result = new Text();
 		if(score >= 60) {
 			result.setText("Pass!");
@@ -240,15 +240,15 @@ public static BorderPane conclude() {
 		pane.setCenter(show_result);
 		// Scene scene = new Scene(pane, 1280, 720);
 		return pane;
-}
-public void start(Stage stage) {
-        // stage setting
-        stage.setTitle("");
-        // csLab
-        stage.setScene(scene());
-        stage.show();
-}
-public static void main(String[] args) {
-    launch(args);
-}
+    }
+    public void start(Stage stage) {
+            // stage setting
+            stage.setTitle("");
+            // csLab
+            stage.setScene(scene());
+            stage.show();
+    }
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
