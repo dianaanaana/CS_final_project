@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.binding.StringBinding;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-class Slider_for_music extends Application {
+public class Slider_for_music extends Application {
     private MediaPlayer mediaPlayer;
     private Slider volumeSlider;
 
@@ -32,17 +33,17 @@ class Slider_for_music extends Application {
 
         b1.setOnAction(event -> {
             System.out.println("1");
-            playMusic(new File("src/a.mp3").toURI().toString());
+            playMusic(new File("src/resource/music/a.mp3").toURI().toString());
         });
 
         b2.setOnAction(event -> {
             System.out.println("2");
-            playMusic(new File("src/b.mp3").toURI().toString());
+            playMusic(new File("src/resource/music/b.mp3").toURI().toString());
         });
 
         b3.setOnAction(event -> {
             System.out.println("3");
-            playMusic(new File("src/c.mp3").toURI().toString());
+            playMusic(new File("src/resource/music/c.mp3").toURI().toString());
         });
 
         VBox musicVbox = new VBox();
@@ -95,7 +96,7 @@ class Slider_for_music extends Application {
         root.getChildren().add(playButton);
 
         // 设置场景和舞台
-        Scene scene = new Scene(root, 400, 300);
+        Scene scene = new Scene(root, 1280, 720);
         primaryStage.setTitle("音樂播放器");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -116,7 +117,15 @@ class Slider_for_music extends Application {
             }
         });
     }
-
+    public void startApplication(String[] args) {
+        Platform.runLater(() -> {
+            try {
+                start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
     public static void main(String[] args) {
         launch(args);
     }
