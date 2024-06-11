@@ -19,7 +19,7 @@ public class Main extends Application{
     static BorderPane pane_main = new BorderPane();
     static StackPane pane_bg = new StackPane();
     static Scene scene = new Scene(pane_bg, 1280, 720);
-    static Settings settings = new Settings();
+    static Lines lines = new Lines();
     
     public static Scene scene() {
         
@@ -44,11 +44,19 @@ public class Main extends Application{
         stage.show();
 
         startGame.setOnMouseClicked(e -> {
-            stage.setScene(Loading.scene(Dorm.scene(640, 360), 2));
+            System.err.println("Start Game");
+            // stage.setScene(Loading.scene(Dorm.scene(640, 360), 2));
+            try {
+                stage.setScene(Loading.scene(lines.scene(), 2));
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
         });
         settingsImage.setOnMouseClicked(e -> {
-            // stage.setScene(Loading.scene(Settings.scene(), 2));
-            stage.setScene(Loading.scene(settings.scene(), 2));
+            stage.setScene(Loading.scene(Settings.scene(), 2));
+            // stage.setScene(Loading.scene(settings.scene(), 2));
             System.err.println("Settings");
 
         });
