@@ -20,7 +20,8 @@ public class Main extends Application{
     static StackPane pane_bg = new StackPane();
     static Scene scene = new Scene(pane_bg, 1280, 720);
     static Lines lines = new Lines();
-    
+    static Music music = new Music();
+
     public static Scene scene() {
         
         // scene setting
@@ -29,6 +30,7 @@ public class Main extends Application{
             pane_bg.getChildren().addAll(new ImageView("/resources/images/start_bg.png"), pane_main);
             initInvoke = false;
         }
+        music.playMusic();
         center.setAlignment(Pos.CENTER);
         pane_main.setCenter(center);
         StackPane.setAlignment(center, Pos.CENTER);
@@ -45,22 +47,25 @@ public class Main extends Application{
 
         startGame.setOnMouseClicked(e -> {
             System.err.println("Start Game");
-            // stage.setScene(Loading.scene(Dorm.scene(640, 360), 2));
-            try {
-                stage.setScene(Loading.scene(lines.scene(), 2));
-            } catch (IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+            music.buttonClick.play();
+            stage.setScene(Loading.scene(Dorm.scene(640, 360), 2));
+            // try {
+            //     stage.setScene(Loading.scene(lines.scene(), 2));
 
+            // } catch (IOException e1) {
+            //     // TODO Auto-generated catch block
+            //     e1.printStackTrace();
+            // }
         });
         settingsImage.setOnMouseClicked(e -> {
+            music.buttonClick.play();
             stage.setScene(Loading.scene(Settings.scene(), 2));
-            // stage.setScene(Loading.scene(settings.scene(), 2));
+            // stage.setScene(Loading.scene(settings.scene(), 2)); 
             System.err.println("Settings");
 
         });
         exit.setOnMouseClicked(e -> {
+            music.buttonClick.play();
             stage.close();
         });
 

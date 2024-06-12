@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -13,6 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -56,6 +59,7 @@ public class Engineerv0 extends Application{
 
 	Boolean start = false;
 	Boolean b2b = false;
+	Boolean b2s = false;
 	
 	public BorderPane conclude() {
 		BorderPane pane = new BorderPane();
@@ -71,15 +75,30 @@ public class Engineerv0 extends Application{
 	}
 	
 	public Scene scene() throws IOException{
+		Main.music.swtichMusic(Main.music.main, Main.music.exam);
 		Question question = new Question();
 		question.ReadTopic();
 		
 		ImageView startGame = new ImageView("resources/images/ss.png");
+		ImageView bg = new ImageView("/resources/images/classroom.png");
+		ImageView ib = new ImageView("/resources/images/exam_instruction.png");
+		ImageView instruction = new ImageView("/resources/images/instruction_engineering.png");
         BorderPane pane_start = new BorderPane();
+		BorderPane pane_instruction = new BorderPane();
 		BorderPane pane = new BorderPane();
 		BorderPane pane_ctrler = new BorderPane();
-		pane_start.setCenter(startGame);
+		StackPane stackPane = new StackPane();
+		VBox buttons = new VBox(5);
+		stackPane.getChildren().addAll(bg, pane_ctrler);
+		pane_start.setCenter(buttons);
         pane_ctrler.setCenter(pane_start);
+		FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), bg);
+        fadeOut.setFromValue(0.5);
+        fadeOut.setToValue(0.5);
+		fadeOut.play();
+		pane_instruction.setCenter(instruction);
+		buttons.getChildren().addAll(startGame, ib);
+		buttons.setAlignment(Pos.CENTER);
 		
 		HBox topicBox = new HBox();
 		topicBox.setAlignment(Pos.CENTER);
@@ -98,7 +117,7 @@ public class Engineerv0 extends Application{
 		scoreLabel.setFont(new Font(75));
 		score_infoText.setFont(new Font(75));
 		
-		Scene scene = new Scene(pane_ctrler, 1280, 720);
+		Scene scene = new Scene(stackPane, 1280, 720);
 		ArrayList<String> answerArrayList = new ArrayList<String>();
 		String answerStr = question.topic_com();;
 		for(int i=0; i<answerStr.length(); i++) {
@@ -200,6 +219,8 @@ public class Engineerv0 extends Application{
 					answerArrayList.remove(0);
 				}
 				else {
+					Main.music.wrongTyping.stop();
+					Main.music.wrongTyping.play();
 					System.out.println("Wrong: {"+answerArrayList.get(0)+"}|{"+e.getCode()+"}");
 				}
 			}
@@ -211,9 +232,26 @@ public class Engineerv0 extends Application{
                 timeline.play();
             }
         });
+		ib.setOnMouseClicked(e -> {
+			System.err.println("Instruction");
+			pane_ctrler.setCenter(pane_instruction);
+			Timeline b2sT = new Timeline();
+			b2sT.getKeyFrames().add(new KeyFrame(Duration.seconds(5), e2 -> {
+			}));
+			b2sT.play();
+			b2sT.setOnFinished(e3 -> {
+				b2s = true;
+			});
+		});
 		scene.setOnMouseClicked(e -> {
+			if(b2s) {
+                System.err.println("Back to start");
+				pane_ctrler.setCenter(pane_start);
+				b2s = false;
+			}
 			if (b2b) {
 				Main.switchScene(Loading.scene(Building_2.scene(0, 360), 2));
+				Main.music.swtichMusic(Main.music.exam, Main.music.main);
 			}
 		});
 		return scene;

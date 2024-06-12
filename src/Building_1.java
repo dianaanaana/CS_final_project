@@ -67,6 +67,7 @@ public class Building_1 extends Application{
                 if (targetX < 0) {
                     System.err.println("Error: ImageView has hit the left boundary!");
                     Main.switchScene(Loading.scene(Calculus.scene(), 2));
+                    
                 }
                 // right boundary
                 if (targetX + mainC.getWidth() > scene.getWidth()) {

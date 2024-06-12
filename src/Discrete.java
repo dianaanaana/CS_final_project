@@ -2,6 +2,7 @@ import java.util.*;
 
 import javafx.scene.text.Font;
 import javafx.util.Duration;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -36,6 +38,7 @@ public class Discrete extends Application{
     static Boolean start = false;
     static Boolean end = false;
     static Boolean b2b = false;
+    static Boolean b2s = false;
     static int score = 0;
     static Text scoreT = new Text(Integer.toString(score));
     static ImageView startGame = new ImageView("resources/images/ss.png");
@@ -43,10 +46,16 @@ public class Discrete extends Application{
     static Image info2 = new Image("/resources/images/info2.gif");
     static Image bomb1 = new Image("/resources/images/bomb1.jpg");
     static Image bomb2 = new Image("/resources/images/bomb2.gif");
+    static ImageView bg = new ImageView("/resources/images/classroom.png");
+    static ImageView ib = new ImageView("/resources/images/exam_instruction.png");
+    static ImageView instruction = new ImageView("/resources/images/instruction_discrete.png");
     static BorderPane pane_start = new BorderPane();
     static BorderPane pane = new BorderPane();
+    static BorderPane pane_instruction = new BorderPane();
+    static StackPane stackPane = new StackPane();
     static BorderPane pane_ctrler = new BorderPane();
-    static Scene scene = new Scene(pane_ctrler, 1280, 720);
+    static VBox buttons = new VBox(5);
+    static Scene scene = new Scene(stackPane, 1280, 720);
     static int gameTime = 60;
     static Text timerText = new Text();
     static int[][][] positions = {
@@ -59,10 +68,19 @@ public class Discrete extends Application{
     static ArrayList<objs> infos_2 = new ArrayList<>();
     static ArrayList<objs> waste_1 = new ArrayList<>();
     static ArrayList<objs> waste_2 = new ArrayList<>();
+
     public static Scene scene() {
+        Main.music.swtichMusic(Main.music.main, Main.music.exam);
         pane_ctrler.setCenter(pane_start);
-        pane_start.setCenter(startGame);
-        
+        pane_instruction.setCenter(instruction);
+        buttons.getChildren().addAll(startGame, ib);
+        buttons.setAlignment(Pos.CENTER);
+        pane_start.setCenter(buttons);
+        stackPane.getChildren().addAll(bg, pane_ctrler); 
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), bg);
+        fadeOut.setFromValue(0.5);
+        fadeOut.setToValue(0.5);
+		fadeOut.play();
         
         // infos and wastes
         for(int i = 0; i < gameTime; i++) {
@@ -133,7 +151,7 @@ public class Discrete extends Application{
         timerText.setText("Time: " + gameTime);
         timerText.setFont(new Font(100));
         timer.getKeyFrames().add(new KeyFrame(Duration.seconds(1), e -> {
-            printHeapStats();
+            // printHeapStats();
             gameTime--;
             if (gameTime > 0) {
                 timerText.setText("Time: " + gameTime);
@@ -163,9 +181,28 @@ public class Discrete extends Application{
                 timer.play();
             }
         });
+        ib.setOnMouseClicked(e -> {
+			System.err.println("Instruction");
+			pane_ctrler.setCenter(pane_instruction);
+			Timeline b2sT = new Timeline();
+			b2sT.getKeyFrames().add(new KeyFrame(Duration.seconds(5), e2 -> {
+			}));
+			b2sT.play();
+			b2sT.setOnFinished(e3 -> {
+				b2s = true;
+			});
+		});
         
         scene.setOnMouseClicked(e -> {
-            if(b2b) Main.switchScene(Loading.scene(Building_1.scene(1280, 360), 2));
+            if(b2s) {
+                System.err.println("Back to start");
+				pane_ctrler.setCenter(pane_start);
+				b2s = false;
+			}
+            if(b2b) {
+                Main.switchScene(Loading.scene(Building_1.scene(1280, 360), 2));
+                Main.music.swtichMusic(Main.music.exam, Main.music.main);
+            }
         });
         return scene;
     }
@@ -177,6 +214,8 @@ public class Discrete extends Application{
             if(!obj.isScored && !end) {
                 score += s;
                 scoreT.setText(Integer.toString(score));
+                if(s == -10) Main.music.wrongTyping.play();
+                // else Main.music.correctTyping.play();
             }
             obj.isScored = true;
             Timeline vanish = new Timeline();

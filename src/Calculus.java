@@ -1,3 +1,5 @@
+import java.sql.Time;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -73,15 +75,29 @@ public class Calculus extends Application{
 	static int score = 100;
 	static int round = 0;
 	static ImageView bg = new ImageView(new Image("resources/images/classroom.png"));
+	static ImageView startGame = new ImageView(new Image("resources/images/ss.png"));
+	static ImageView ib = new ImageView(new Image("resources/images/exam_instruction.png"));
+	static ImageView instruction = new ImageView(new Image("resources/images/instruction_calculus.png"));
 	static BorderPane pane = new BorderPane();
+	static BorderPane pane_start = new BorderPane();
+	static BorderPane pane_instruction = new BorderPane();
+	static VBox buttons = new VBox(5);
 	static StackPane stackPane = new StackPane();
 	static BorderPane pane_ctrler = new BorderPane();
-	static Scene scene = new Scene(pane_ctrler, 1280, 720);
+	static Scene scene = new Scene(stackPane, 1280, 720);
 	static Boolean b2b = false;
+	static Boolean b2s = false;
 
 	public static Scene scene() {
-		stackPane.getChildren().addAll(bg, pane);
-		pane_ctrler.setCenter(stackPane);
+		Main.music.swtichMusic(Main.music.main, Main.music.exam);
+		buttons.getChildren().addAll(startGame, ib);
+		pane_start.setCenter(buttons);
+		buttons.setAlignment(Pos.CENTER);
+		pane_instruction.setCenter(instruction);
+		// stackPane.getChildren().addAll(bg, pane);
+		stackPane.getChildren().addAll(bg, pane_ctrler);
+		// pane_ctrler.setCenter(stackPane);
+		pane_ctrler.setCenter(pane_start);
 		FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), bg);
         fadeOut.setFromValue(0.5);
         fadeOut.setToValue(0.5);
@@ -134,6 +150,8 @@ public class Calculus extends Application{
 					roundLabel.setText("Round: " + String.valueOf(round));
 
 				} else {
+					Main.music.wrongTyping.stop();
+					Main.music.wrongTyping.play();
 					score-=10;
 					win_not.setText(String.valueOf(score));
 				}
@@ -204,8 +222,31 @@ public class Calculus extends Application{
 			// 	break;
 			// }
 		});
+		startGame.setOnMouseClicked(e -> {
+			System.err.println("Start Game");
+            pane_ctrler.setCenter(pane);
+        });
+		ib.setOnMouseClicked(e -> {
+			System.err.println("Instruction");
+			pane_ctrler.setCenter(pane_instruction);
+			Timeline timer = new Timeline();
+			timer.getKeyFrames().add(new KeyFrame(Duration.seconds(5), e2 -> {
+			}));
+			timer.play();
+			timer.setOnFinished(e3 -> {
+				b2s = true;
+			});
+		});
+
 		scene.setOnMouseClicked(e -> {
-			if(b2b) Main.switchScene(Loading.scene(Building_1.scene(0, 360), 2));
+			if(b2s) {
+				pane_ctrler.setCenter(pane_start);
+				b2s = false;
+			}
+			if(b2b) {
+				Main.switchScene(Loading.scene(Building_1.scene(0, 360), 2));
+				Main.music.swtichMusic(Main.music.exam, Main.music.main);
+			}
 		});
 		return scene;
 	}

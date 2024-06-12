@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.Stack;
 
 // import game.game_scene.GameSettings;
 // import game.game_scene.Music;
@@ -57,15 +58,40 @@ public class ComputerScience extends Application {
     // private Music gamebegin;    
     // private Music pass;
     // private Music fail;   
+    ImageView bg = new ImageView("/resources/images/classroom.png");
+    ImageView startGame = new ImageView("/resources/images/ss.png");
+    ImageView ib = new ImageView("/resources/images/exam_instruction.png");
+    ImageView instruction = new ImageView("/resources/images/instruction_cs.png");
+    VBox buttons_s = new VBox();
+    BorderPane pane_ctrler = new BorderPane();
+    BorderPane pane_start = new BorderPane();
+    BorderPane pane_instruction = new BorderPane();
+    StackPane pane_bg = new StackPane();
+    Boolean b2s = false;
+
     
     private MediaPlayer pedro;
+    private MediaPlayer pedro2;
+
     private MediaPlayer pedroPass;
     private MediaPlayer pedroFa;
     private Button enter = new Button();
 
     public Scene scene() {
+        Main.music.swtichMusic(Main.music.main, Main.music.exam);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), bg);
+        fadeOut.setFromValue(0.5);
+        fadeOut.setToValue(0.5);
+		fadeOut.play();
+
+        pane_instruction.setCenter(instruction);
+        pane_bg.getChildren().addAll(bg, pane_ctrler);
+        pane_ctrler.setCenter(pane_start);
+        pane_start.setCenter(buttons_s);
+        buttons_s.getChildren().addAll(startGame, ib);
+        buttons_s.setAlignment(Pos.CENTER);
         StackPane root = new StackPane();
-        Scene scene = new Scene(root, 1280, 720);
+        Scene scene = new Scene(pane_bg, 1280, 720);
         try {
     		//background
     		File imagefile = new File("./game/blackBoard.jpg");
@@ -103,25 +129,33 @@ public class ComputerScience extends Application {
             newbox.getChildren().addAll(scoreLabel);
             newbox.setAlignment(Pos.CENTER);
 
-            enter.setOnAction(e -> startSpin());
+            //enter.setOnAction(e -> startSpin());
+           
 
-
+            String music = new File("src/resources/musics/spinNumber.mp3").toURI().toString();
             String passStr = new File("src/resources/musics/pass.mp3").toURI().toString();
             String failStr = new File("src/resources/musics/fail.mp3").toURI().toString();
             String beginmusic = new File("src/resources/musics/begin.mp3").toURI().toString();
             
+            Media musicMedia = new Media(music);
             Media passMe = new Media(passStr);
             Media failMe = new Media(failStr);
             Media beginMe = new Media(beginmusic);
+            pedro2 = new MediaPlayer(musicMedia);
             pedro = new MediaPlayer(beginMe);
             pedroPass = new MediaPlayer(passMe);
             pedroFa = new MediaPlayer(failMe);
-            
+
+            MediaView mediaview2 = new MediaView(pedro2);
             MediaView mediaview = new MediaView(pedro);
             MediaView mediaviewpa = new MediaView(pedroPass);
             MediaView mediaviewfa = new MediaView (pedroFa);
             
-            
+            enter.setOnAction(e->{
+                startSpin();
+                pedro2.seek(Duration.ZERO);
+                pedro2.play();
+            });
             
             // Ensure the image covers the entire background
             lossColor(imageView);
@@ -157,16 +191,40 @@ public class ComputerScience extends Application {
             // Initialize the random number generator and available numbers
             random = new Random();
             initializeNumbers();
+            startGame.setOnMouseClicked(e -> {
+                pane_ctrler.setCenter(root);
+            });
+            ib.setOnMouseClicked(e -> {
+                System.err.println("Instruction");
+                pane_ctrler.setCenter(pane_instruction);
+                Timeline b2sT = new Timeline();
+                b2sT.getKeyFrames().add(new KeyFrame(Duration.seconds(5), e2 -> {
+                }));
+                b2sT.play();
+                b2sT.setOnFinished(e3 -> {
+                    b2s = true;
+                });
+            });
             scene.setOnMouseClicked(e -> {
+                if(b2s) {
+                    System.err.println("Back to start");
+                    pane_ctrler.setCenter(pane_start);
+                    b2s = false;
+                }
                 if(b2b) {
                     // primaryStage.close();
                     Main.switchScene(Loading.scene(Building_2.scene(1280, 360), 2));
+                    Main.music.swtichMusic(Main.music.exam, Main.music.main);
                 }
             });
     	}
     	catch(Exception e) {
     		System.out.println(e.getMessage());
     	}
+
+        
+
+
         return scene;
     }
 
@@ -203,9 +261,9 @@ public class ComputerScience extends Application {
         }
 
         timeline = new Timeline();
-        timeline.setCycleCount(20); // 设置动画循环次数
+        timeline.setCycleCount(60); // spin times
 
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(100), event -> spin());
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(130), event -> spin());
 
         timeline.getKeyFrames().add(keyFrame);
         timeline.setOnFinished(event -> {

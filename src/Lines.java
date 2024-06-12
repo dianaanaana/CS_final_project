@@ -30,6 +30,10 @@ public class Lines extends Application{
 	private boolean isMousePressedEnabled = true;
     Boolean ncuYes = false;
 	
+	public ArrayList<String> get_lineArray(){
+		return lineArray;
+	}
+
 	public void LoadLine(String FileLocate) throws IOException{
 		StoryLine storyLine = new StoryLine();
 		storyLine.get_lineText(FileLocate);

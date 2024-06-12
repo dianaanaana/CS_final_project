@@ -1,8 +1,11 @@
+import java.io.IOException;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +24,7 @@ public class Road extends Application{
     static Image walk_right = new Image("/resources/images/walk_rightv150.gif");
     static Image walk_left = new Image("/resources/images/walk_leftv150.gif");
     static ImageView imageView = new ImageView();
+    // static ImageView senpai = new ImageView("/resources/images/senpai.png");
     static ImageView bg = new ImageView("/resources/images/road.png");
     static Pane move = new Pane();
     static BorderPane pane = new BorderPane();
@@ -29,8 +33,12 @@ public class Road extends Application{
     public static Scene scene(double iniX, double iniY) {
         if (initInvoke) {
             imageView.setImage(mainC);
+            // senpai.setFitHeight(100);
+            // senpai.setFitWidth(100);
             move.getChildren().add(imageView);
             pane.setCenter(move);
+            // pane.setRight(senpai);
+            // BorderPane.setAlignment(senpai, Pos.BOTTOM_RIGHT);
             pane_bg.getChildren().addAll(bg, pane);
             initInvoke = false;
         }
@@ -44,6 +52,7 @@ public class Road extends Application{
                 double oldY = imageView.getTranslateY();
                 double targetX = e.getSceneX() - mainC.getWidth()/2;
                 double targetY = e.getSceneY() - mainC.getHeight()/2;
+                System.err.println("targetX: " + targetX + " targetY: " + targetY);
                 double distanceX = targetX - imageView.getTranslateX();
                 double distanceY = targetY - imageView.getTranslateY();
                 double distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
@@ -81,6 +90,19 @@ public class Road extends Application{
                 // bottom boundary
                 if (targetY + mainC.getHeight() > scene.getHeight()) {
                     System.err.println("Error: ImageView has hit the bottom boundary!");
+                }
+                // if (imageView.getBoundsInLocal().intersects(senpai.getBoundsInLocal())) {
+                //     System.err.println("Senpai: Hi, I'm your senpai.");
+                // }
+                if (targetX > 930 && targetX < 1040 && targetY > 400 && targetY < 500) {
+                    System.err.println("Senpai: Hi, I'm your senpai.");
+                    Draw draw = new Draw();
+                    try {
+                        Main.switchScene(Loading.scene(draw.scene(), 2));
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                 }
                 });
             }

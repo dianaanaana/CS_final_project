@@ -5,12 +5,12 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Dorm extends Application{
@@ -19,10 +19,12 @@ public class Dorm extends Application{
     static Image mainC_left = new Image("/resources/images/stand_left.png");
     static Image walk_right = new Image("/resources/images/walk_rightv150.gif");
     static Image walk_left = new Image("/resources/images/walk_leftv150.gif");
+    static Image bg = new Image("/resources/images/dorm.png");
     static ImageView imageView = new ImageView();
     static Pane move = new Pane();
     static BorderPane pane = new BorderPane();
-    static Scene scene = new Scene(pane, 1280, 720);
+    static StackPane stackPane = new StackPane();
+    static Scene scene = new Scene(stackPane, 1280, 720);
 
     
 
@@ -31,6 +33,7 @@ public class Dorm extends Application{
             imageView.setImage(mainC);
             move.getChildren().add(imageView);
             pane.setCenter(move);
+            stackPane.getChildren().addAll(new ImageView(bg), pane);
             initInvoke = false;
         }
 
@@ -70,7 +73,7 @@ public class Dorm extends Application{
                     // right boundary
                     if (targetX + mainC.getWidth() > scene.getWidth()) {
                         System.err.println("Error: ImageView has hit the right boundary!");
-                        Main.switchScene(Road_1.scene(0, 360));
+                        Main.switchScene(Loading.scene(Road.scene(0, 360), 2));
                     }
                     // top boundary
                     if (targetY < 0) {
@@ -84,7 +87,6 @@ public class Dorm extends Application{
             }
         });
 
-        pane.setTop(new Label("dorm"));
 
         return scene;
     }
