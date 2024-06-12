@@ -28,6 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -62,9 +63,10 @@ public class ComputerScience extends Application {
     private MediaPlayer pedroFa;
     private Button enter = new Button();
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-    	try {
+    public Scene scene() {
+        StackPane root = new StackPane();
+        Scene scene = new Scene(root, 1280, 720);
+        try {
     		//background
     		File imagefile = new File("./game/blackBoard.jpg");
             Image image = new Image(imagefile.toURI().toString());
@@ -96,10 +98,10 @@ public class ComputerScience extends Application {
             scoreLabel.setStyle("-fx-font-size: 18pt;");
 
             VBox newbox = new VBox(10);
-            newbox.setAlignment(Pos.CENTER);
+            
             newbox.getChildren().addAll(resultLabel, enter);
             newbox.getChildren().addAll(scoreLabel);
-
+            newbox.setAlignment(Pos.CENTER);
 
             enter.setOnAction(e -> startSpin());
 
@@ -131,6 +133,7 @@ public class ComputerScience extends Application {
             choose = new Label(" You choose: " + "\n" + numWeChoose);
             al = createButtons();
             numbers.clear();
+            number.setFont(new Font(25));  //tim
 
             VBox topBox = new VBox(10);
             topBox.setAlignment(Pos.CENTER);
@@ -140,33 +143,43 @@ public class ComputerScience extends Application {
             BorderPane.setAlignment(al, Pos.CENTER);
 //            BorderPane.setAlignment(choose, Pos.CENTER);
             
+            choose.setFont(new Font(25));  //tim
             content.setTop(topBox);
             content.setCenter(newbox);
             content.setLeft(choose); // 将 choose 放在左边
             content.setBottom(al);
 
-            StackPane root = new StackPane();
+            
             root.getChildren().addAll(imageView, content);
 
 //            root.setBackground(background);
-            Scene scene = new Scene(root, 1280, 720);
-
-            primaryStage.setTitle("predict");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
+            
             // Initialize the random number generator and available numbers
             random = new Random();
             initializeNumbers();
             scene.setOnMouseClicked(e -> {
                 if(b2b) {
-                    primaryStage.close();
+                    // primaryStage.close();
+                    Main.switchScene(Loading.scene(Building_2.scene(1280, 360), 2));
                 }
             });
     	}
     	catch(Exception e) {
     		System.out.println(e.getMessage());
     	}
+        return scene;
+    }
+
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+    	
+
+            primaryStage.setTitle("predict");
+            primaryStage.setScene(scene());
+            primaryStage.show();
+
+            
         
     }
 
@@ -275,9 +288,16 @@ public class ComputerScience extends Application {
         buttons = new Button[10];
         for (int i = 0; i < buttons.length; i++) {
             Button button = new Button(Integer.toString(i + 1));
+            button.setPrefSize(50, 50);  //tim
 
             int index = i + 1;
             button.setOnAction(event -> handleButtonClick(index));
+            button.setOnMouseEntered(e -> {
+                button.setPrefSize(75, 75);
+            });
+            button.setOnMouseExited(e -> {
+                button.setPrefSize(50, 50);
+            });
             buttons[i] = button;
         }
 

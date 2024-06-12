@@ -81,7 +81,9 @@ public class Building_2 extends Application{
                     if (targetX + mainC.getWidth() > scene.getWidth()) {
                         System.err.println("Error: ImageView has hit the right boundary!");
                         ComputerScience app = new ComputerScience();
-                        app.startApplication(new String[0]);
+                        Main.switchScene(Loading.scene(app.scene(), 2));
+                        // ComputerScience app = new ComputerScience();
+                        // app.startApplication(new String[0]);
                     }
                     // top boundary
                     if (targetY < 0) {
