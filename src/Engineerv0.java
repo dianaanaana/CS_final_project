@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -48,12 +49,15 @@ class Question{
 }
 
 
-public class Engineer extends Application{
+public class Engineerv0 extends Application{
 	private int score=0;
-	private int timeSeconds = 10;
+	private int timeSeconds = 30;
 	private Text timerLabel = new Text();
+
+	Boolean start = false;
+	Boolean b2b = false;
 	
-	public Scene conclude() {
+	public BorderPane conclude() {
 		BorderPane pane = new BorderPane();
 		Text scoreText = new Text();
 		scoreText.setText("Your score: "+String.valueOf(score));
@@ -61,15 +65,21 @@ public class Engineer extends Application{
 		pane.setCenter(scoreText);
 		BorderPane.setAlignment(scoreText, Pos.CENTER);
 		
-		Scene scene = new Scene(pane, 1280, 720);
-		return scene;
+		// Scene scene = new Scene(pane, 1280, 720);
+		// return scene;
+		return pane;
 	}
 	
-	public void start(Stage primaryStage) throws IOException {
+	public Scene scene() throws IOException{
 		Question question = new Question();
 		question.ReadTopic();
 		
+		ImageView startGame = new ImageView("resources/images/ss.png");
+        BorderPane pane_start = new BorderPane();
 		BorderPane pane = new BorderPane();
+		BorderPane pane_ctrler = new BorderPane();
+		pane_start.setCenter(startGame);
+        pane_ctrler.setCenter(pane_start);
 		
 		HBox topicBox = new HBox();
 		topicBox.setAlignment(Pos.CENTER);
@@ -88,11 +98,7 @@ public class Engineer extends Application{
 		scoreLabel.setFont(new Font(75));
 		score_infoText.setFont(new Font(75));
 		
-		Scene scene = new Scene(pane, 1280, 720);
-		primaryStage.setTitle("Engineer");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
+		Scene scene = new Scene(pane_ctrler, 1280, 720);
 		ArrayList<String> answerArrayList = new ArrayList<String>();
 		String answerStr = question.topic_com();;
 		for(int i=0; i<answerStr.length(); i++) {
@@ -129,11 +135,13 @@ public class Engineer extends Application{
 			}
 			else if(timeSeconds <= -3) {
 				// timeline.stop();
-				primaryStage.setScene(conclude());
+				// primaryStage.setScene(conclude());
+				pane_ctrler.setCenter(conclude());
+				b2b = true;
 			}
 		}));
 		// timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.setCycleCount(13);
+		timeline.setCycleCount(timeSeconds+3);
 		timeline.play();
 		
 		pane.setBottom(timerLabel);
@@ -196,6 +204,28 @@ public class Engineer extends Application{
 				}
 			}
 		});
+		startGame.setOnMouseClicked(e -> {
+            pane_ctrler.setCenter(pane);
+            start = true;
+            if(start) {
+                timeline.play();
+            }
+        });
+		scene.setOnMouseClicked(e -> {
+			if (b2b) {
+				Main.switchScene(Loading.scene(Building_2.scene(0, 360), 2));
+			}
+		});
+		return scene;
+	}
+
+	public void start(Stage primaryStage) throws IOException {
+		
+		primaryStage.setTitle("Engineer");
+		primaryStage.setScene(scene());
+		primaryStage.show();
+		
+		
 	}
 	
 	public static void main(String[] args) {

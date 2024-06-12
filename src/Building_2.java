@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -65,10 +67,15 @@ public class Building_2 extends Application{
                     // left boundary
                     if (targetX < 0) {
                         System.err.println("Error: ImageView has hit the left boundary!");
-                        // Main.switchScene(Loading.scene(Engineer.scene(), 2));
-                        // Engineerv0.main(new String[0]);
-                        Engineerv2 app = new Engineerv2();
-                        app.startApplication(new String[0]);
+                        Engineerv0 app = new Engineerv0();
+                        try {
+                            Main.switchScene(Loading.scene(app.scene(), 2));
+                        } catch (IOException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        }
+                        // Engineerv2 app = new Engineerv2();
+                        // app.startApplication(new String[0]);
                     }
                     // right boundary
                     if (targetX + mainC.getWidth() > scene.getWidth()) {
