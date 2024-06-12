@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,9 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -23,7 +20,7 @@ import javafx.util.Duration;
 
 public class Draw extends Application{
 	private static boolean isMousePressedEnabled = true;
-	private static boolean isFinishLine = false;
+	// private static boolean isFinishLine = false;
 	private static BorderPane pane_control = new BorderPane();
 	Lines line = new Lines();
 	
@@ -68,7 +65,7 @@ public class Draw extends Application{
 				if(line.get_lineArray().get(line_locate[0]).substring(0, 8).equals("--------")) {
 					Main.music.swtichMusic(Main.music.main, Main.music.draw);
 					isMousePressedEnabled = true;
-					line_locate[0]+=1;
+					// line_locate[0]+=1;
 				}
 				
 				else if(line.get_lineArray().get(line_locate[0]).substring(0, 8).equals("    end1")) {
@@ -130,7 +127,6 @@ public class Draw extends Application{
 		try {
 			Draw_talk(pane, "src/resources/scripts/tim.txt");
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		});
@@ -162,7 +158,6 @@ public class Draw extends Application{
 		try {
 			Draw_talk(pane, "src/resources/scripts/noah.txt");
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		});
@@ -194,7 +189,6 @@ public class Draw extends Application{
 		try {
 			Draw_talk(pane, "src/resources/scripts/steven.txt");
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		});

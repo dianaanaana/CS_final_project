@@ -53,7 +53,6 @@ public class Main extends Application{
             //     stage.setScene(Loading.scene(lines.scene(), 2));
 
             // } catch (IOException e1) {
-            //     // TODO Auto-generated catch block
             //     e1.printStackTrace();
             // }
         });

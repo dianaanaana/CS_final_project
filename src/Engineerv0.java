@@ -54,7 +54,7 @@ class Question{
 
 public class Engineerv0 extends Application{
 	private int score=0;
-	private int timeSeconds = 30;
+	private int timeSeconds = 60;
 	private Text timerLabel = new Text();
 
 	Boolean start = false;

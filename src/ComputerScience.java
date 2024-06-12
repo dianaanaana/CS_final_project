@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.Stack;
-
 // import game.game_scene.GameSettings;
 // import game.game_scene.Music;
 // import game.game_scene.SoundPlayer;
@@ -28,7 +26,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
+// import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -44,7 +42,7 @@ public class ComputerScience extends Application {
     private Button[] buttons;
     private Label choose;
     private String numWeChoose = "";
-    private VBox vanswer = new VBox();
+    // private VBox vanswer = new VBox();
     private BorderPane content = new BorderPane();
     private String score = "";
     private Timeline timeline;
@@ -146,10 +144,10 @@ public class ComputerScience extends Application {
             pedroPass = new MediaPlayer(passMe);
             pedroFa = new MediaPlayer(failMe);
 
-            MediaView mediaview2 = new MediaView(pedro2);
-            MediaView mediaview = new MediaView(pedro);
-            MediaView mediaviewpa = new MediaView(pedroPass);
-            MediaView mediaviewfa = new MediaView (pedroFa);
+            // MediaView mediaview2 = new MediaView(pedro2);
+            // MediaView mediaview = new MediaView(pedro);
+            // MediaView mediaviewpa = new MediaView(pedroPass);
+            // MediaView mediaviewfa = new MediaView (pedroFa);
             
             enter.setOnAction(e->{
                 startSpin();

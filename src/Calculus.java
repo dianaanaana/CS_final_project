@@ -1,5 +1,3 @@
-import java.sql.Time;
-
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

@@ -90,7 +90,6 @@ public class Lines extends Application{
 			try {
 				LoadLine("src/resources/scripts/NCUstory.txt");
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
@@ -111,7 +110,6 @@ public class Lines extends Application{
 			try {
 				LoadLine("src/resources/scripts/NTUend.txt");
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});

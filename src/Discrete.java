@@ -86,8 +86,8 @@ public class Discrete extends Application{
         for(int i = 0; i < gameTime; i++) {
             objs tmp = new objs(info1, info2);
             objs tmp2 = new objs(info1, info2);
-            objsSetting(tmp, 2);
-            objsSetting(tmp2, 2);
+            objsSetting(tmp, 1);
+            objsSetting(tmp2, 1);
             infos_1.add(tmp);
             infos_2.add(tmp2);
             if(i % 2 == 0) {

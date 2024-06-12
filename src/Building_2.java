@@ -71,7 +71,6 @@ public class Building_2 extends Application{
                         try {
                             Main.switchScene(Loading.scene(app.scene(), 2));
                         } catch (IOException e1) {
-                            // TODO Auto-generated catch block
                             e1.printStackTrace();
                         }
                         // Engineerv2 app = new Engineerv2();
