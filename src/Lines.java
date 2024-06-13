@@ -29,6 +29,7 @@ public class Lines extends Application{
 	private static ArrayList<String> lineArray = new ArrayList<String>();
 	private boolean isMousePressedEnabled = true;
     Boolean ncuYes = false;
+	Boolean ntuYes = false;
 	
 	public ArrayList<String> get_lineArray(){
 		return lineArray;
@@ -103,6 +104,7 @@ public class Lines extends Application{
 			option_No.setStroke(Color.WHITE);
 		});
 		option_No.setOnMousePressed(e -> {
+			ntuYes = true;
 			option_Yes.setVisible(false);
 			option_No.setVisible(false);
 			switchBackground(pane, "NTU.jpg");
@@ -169,6 +171,10 @@ public class Lines extends Application{
 				else if(lineArray.get(line_locate[0]).substring(0, 7).equals("    end")) {
 					dialog.setOnMousePressed(null);
                     if(ncuYes) Main.switchScene(Loading.scene(Dorm.scene(640, 360), 2));
+					if(ntuYes) {
+						Result_ntu result_ntu = new Result_ntu();
+						Main.switchScene(result_ntu.scene());
+					}
 				}
 				
 				else if(line_locate[0]>=0) {

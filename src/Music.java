@@ -26,6 +26,7 @@ public class Music {
             exam.setCycleCount(MediaPlayer.INDEFINITE);
             main.setVolume(0.1);
             exam.setVolume(0.05);
+            draw.setVolume(0.1);
             buttonClick.setVolume(0.1);
             initPlay = false;
         }
