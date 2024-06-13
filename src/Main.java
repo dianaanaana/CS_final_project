@@ -64,13 +64,13 @@ public class Main extends Application{
             System.err.println("Start Game");
             music.buttonClick.stop();
             music.buttonClick.play();
-            stage.setScene(Loading.scene(Dorm.scene(640, 400), 2));
-            // try {
-            //     stage.setScene(Loading.scene(lines.scene(), 2));
+            // stage.setScene(Loading.scene(Dorm.scene(640, 400), 2));
+            try {
+                stage.setScene(Loading.scene(lines.scene(), 2));
 
-            // } catch (IOException e1) {
-            //     e1.printStackTrace();
-            // }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         });
         settingsImage.setOnMouseClicked(e -> {
             music.buttonClick.stop();
