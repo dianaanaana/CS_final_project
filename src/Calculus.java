@@ -132,7 +132,6 @@ public class Calculus extends Application{
 		win_not.setText(String.valueOf(score));
 		bottomBox.getChildren().addAll(score_infoText, win_not);
 		win_not.setVisible(true);
-//		pane.setBottom(bottomBox);
 		BorderPane.setAlignment(score_infoText, Pos.BOTTOM_CENTER);
 		BorderPane.setAlignment(win_not, Pos.CENTER);
 		bottomBox.setAlignment(Pos.BOTTOM_CENTER);
@@ -158,72 +157,23 @@ public class Calculus extends Application{
 				if(round == 10 && score >= 60) {
 					scene.setOnKeyPressed(null);
 					timeline.stop();
-					// Scene conclude = Conclude(score, true);
-					// primaryStage.setScene(conclude);
-					// Main.switchScene(conclude);
 					pane_ctrler.setCenter(Conclude(score, true));
 					Main.scores_calculus = score;
 					b2b = true;
 				} else if(round == 10 && score < 60) {
 					scene.setOnKeyPressed(null);
 					timeline.stop();
-					// Scene conclude = Conclude(score, false);
-					// primaryStage.setScene(conclude);
-					// Main.switchScene(conclude);
 					pane_ctrler.setCenter(Conclude(score, false));
 					Main.scores_calculus = score;
 					b2b = true;
 				} else if(score == 0) {
 					scene.setOnKeyPressed(null);
 					timeline.stop();
-					// Scene conclude = Conclude(score, false);
-					// primaryStage.setScene(conclude);
-					// Main.switchScene(conclude);
 					pane_ctrler.setCenter(Conclude(score, false));
 					Main.scores_calculus = score;
 					b2b = true;
 				}
 			}
-			// switch(e.getCode()) {
-			// case SPACE: 
-			// 	timeline.play();
-			// 	boolean achieve = rectangle.getBoundsInLocal().intersects(obj.get_target().getBoundsInLocal());
-			// 	if(achieve) {
-			// 		obj.switch_target();
-			// 		round+=1;
-			// 		roundLabel.setText("Round: " + String.valueOf(round));
-
-			// 	} else {
-			// 		score-=10;
-			// 		win_not.setText(String.valueOf(score));
-			// 	}
-			// 	if(round == 10 && score >= 60) {
-			// 		scene.setOnKeyPressed(null);
-			// 		timeline.stop();
-			// 		// Scene conclude = Conclude(score, true);
-			// 		// primaryStage.setScene(conclude);
-			// 		// Main.switchScene(conclude);
-			// 		pane_ctrler.setCenter(Conclude(score, true));
-			// 		b2b = true;
-			// 	} else if(round == 10 && score < 60) {
-			// 		scene.setOnKeyPressed(null);
-			// 		timeline.stop();
-			// 		// Scene conclude = Conclude(score, false);
-			// 		// primaryStage.setScene(conclude);
-			// 		// Main.switchScene(conclude);
-			// 		pane_ctrler.setCenter(Conclude(score, false));
-			// 		b2b = true;
-			// 	} else if(score == 0) {
-			// 		scene.setOnKeyPressed(null);
-			// 		timeline.stop();
-			// 		// Scene conclude = Conclude(score, false);
-			// 		// primaryStage.setScene(conclude);
-			// 		// Main.switchScene(conclude);
-			// 		pane_ctrler.setCenter(Conclude(score, false));
-			// 		b2b = true;
-			// 	}
-			// 	break;
-			// }
 		});
 		startGame.setOnMouseClicked(e -> {
 			System.err.println("Start Game");

@@ -1,7 +1,6 @@
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -71,18 +70,6 @@ public class Credit extends Application {
         Scene scene = new Scene(pane, 1280, 720, Color.BLACK); // 設置場景背景為黑色
 
         translateTransition.setOnFinished(EVENT -> {
-            // // 創建返回按鈕
-            // scene.setFill(Color.BLACK);
-        
-            // Button backButton = new Button("返回");
-            // backButton.setLayoutX(250); // 設置按鈕的 X 坐標
-            // backButton.setLayoutY(500); // 設置按鈕的 Y 坐標，將按鈕上移以避免被覆蓋
-            // backButton.setVisible(true); // 顯示按鈕
-            
-            // // 添加按鈕到 Pane
-            // pane.getChildren().add(backButton);
-            
-            // // 重新設置場景背景色為黑色
             Main.stage.close();
         });
         return scene;

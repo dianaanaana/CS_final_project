@@ -141,9 +141,7 @@ public class Discrete extends Application{
         
         }));
         generateInfo.setCycleCount(gameTime);
-        // generateInfo.play();
         generateWaste.setCycleCount(gameTime / 2);
-        // generateWaste.play();
         // score
         scoreT.setFont(new Font(75));
         pane.setTop(scoreT);
@@ -172,7 +170,6 @@ public class Discrete extends Application{
             }
         }));
         timer.setCycleCount(gameTime+3);
-        // timer.play();
         pane.setBottom(timerText);
         BorderPane.setAlignment(timerText, Pos.TOP_CENTER);
         startGame.setOnMouseClicked(e -> {

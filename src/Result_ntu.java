@@ -1,6 +1,5 @@
 import java.io.File;
 
-import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
