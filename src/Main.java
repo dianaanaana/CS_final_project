@@ -10,6 +10,20 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application{
+
+    static int scores_calculus = 0;
+    static int scores_discrete = 0;
+    static int scores_engineering = 0;
+    static int scores_cs = 0;
+    static int mentorPP = 0;
+    static Boolean calNotDone = true;
+    static Boolean disNotDone = true;
+    static Boolean engNotDone = true;
+    static Boolean csNotDone = true;
+    static Boolean mentorNotDone = true;
+    // static int examDone = 0;
+    
+
     static Boolean initInvoke = true;
     static Stage stage;
     static VBox center = new VBox();
@@ -43,12 +57,14 @@ public class Main extends Application{
         // stage setting
         stage.setTitle("ncuRPG");
         stage.setScene(Loading.scene(scene(), 2));
+        stage.setResizable(false);
         stage.show();
 
         startGame.setOnMouseClicked(e -> {
             System.err.println("Start Game");
+            music.buttonClick.stop();
             music.buttonClick.play();
-            stage.setScene(Loading.scene(Dorm.scene(640, 360), 2));
+            stage.setScene(Loading.scene(Dorm.scene(640, 400), 2));
             // try {
             //     stage.setScene(Loading.scene(lines.scene(), 2));
 
@@ -57,6 +73,7 @@ public class Main extends Application{
             // }
         });
         settingsImage.setOnMouseClicked(e -> {
+            music.buttonClick.stop();
             music.buttonClick.play();
             stage.setScene(Loading.scene(Settings.scene(), 2));
             // stage.setScene(Loading.scene(settings.scene(), 2)); 
@@ -64,6 +81,7 @@ public class Main extends Application{
 
         });
         exit.setOnMouseClicked(e -> {
+            music.buttonClick.stop();
             music.buttonClick.play();
             stage.close();
         });

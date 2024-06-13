@@ -170,7 +170,7 @@ public class Lines extends Application{
 				
 				else if(lineArray.get(line_locate[0]).substring(0, 7).equals("    end")) {
 					dialog.setOnMousePressed(null);
-                    if(ncuYes) Main.switchScene(Loading.scene(Dorm.scene(640, 360), 2));
+                    if(ncuYes) Main.switchScene(Loading.scene(Dorm.scene(640, 400), 2));
 					if(ntuYes) {
 						Result_ntu result_ntu = new Result_ntu();
 						Main.switchScene(result_ntu.scene());

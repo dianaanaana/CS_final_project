@@ -46,6 +46,7 @@ public class Dorm extends Application{
                 double oldY = imageView.getTranslateY();
                 double targetX = e.getSceneX() - mainC.getWidth()/2;
                 double targetY = e.getSceneY() - mainC.getHeight()/2;
+                System.err.println("targetX: " + targetX + ", targetY: " + targetY);
                 double distanceX = targetX - imageView.getTranslateX();
                 double distanceY = targetY - imageView.getTranslateY();
                 double distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
@@ -73,7 +74,7 @@ public class Dorm extends Application{
                     // right boundary
                     if (targetX + mainC.getWidth() > scene.getWidth()) {
                         System.err.println("Error: ImageView has hit the right boundary!");
-                        Main.switchScene(Loading.scene(Road.scene(0, 360), 2));
+                        // Main.switchScene(Loading.scene(Road.scene(0, 360), 2));
                     }
                     // top boundary
                     if (targetY < 0) {
@@ -83,11 +84,17 @@ public class Dorm extends Application{
                     if (targetY + mainC.getHeight() > scene.getHeight()) {
                         System.err.println("Error: ImageView has hit the bottom boundary!");
                     }
+                    if(targetX < 440 && targetX > 290 && targetY < 240) Main.switchScene(Loading.scene(Road.scene(0, 360), 2));
                 });
             }
         });
 
-
+        scene.setOnMouseClicked(e -> {
+            // System.err.println("examDone: " + Main.examDone);
+            if(!Main.calNotDone && !Main.disNotDone && !Main.engNotDone && !Main.csNotDone) {
+                Main.switchScene(Loading.scene(Transcript.scene(), 2));
+            }
+        });
         return scene;
     }
     public void start(Stage stage) {

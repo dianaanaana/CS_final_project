@@ -65,24 +65,20 @@ public class Building_2 extends Application{
                         imageView.setImage(mainC_left);
                     }
                     // left boundary
-                    if (targetX < 0) {
+                    if (targetX + mainC.getWidth() < 0) {
                         System.err.println("Error: ImageView has hit the left boundary!");
-                        Engineerv0 app = new Engineerv0();
-                        try {
-                            Main.switchScene(Loading.scene(app.scene(), 2));
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                        // Engineerv2 app = new Engineerv2();
-                        // app.startApplication(new String[0]);
+                        // Engineerv0 app = new Engineerv0();
+                        // try {
+                        //     Main.switchScene(Loading.scene(app.scene(), 2));
+                        // } catch (IOException e1) {
+                        //     e1.printStackTrace();
+                        // }
                     }
                     // right boundary
                     if (targetX + mainC.getWidth() > scene.getWidth()) {
                         System.err.println("Error: ImageView has hit the right boundary!");
-                        ComputerScience app = new ComputerScience();
-                        Main.switchScene(Loading.scene(app.scene(), 2));
                         // ComputerScience app = new ComputerScience();
-                        // app.startApplication(new String[0]);
+                        // Main.switchScene(Loading.scene(app.scene(), 2));
                     }
                     // top boundary
                     if (targetY < 0) {
@@ -92,6 +88,18 @@ public class Building_2 extends Application{
                     if (targetY + mainC.getHeight() > scene.getHeight()) {
                         System.err.println("Error: ImageView has hit the bottom boundary!");
                         Main.switchScene(Loading.scene(Building_1.scene(600, 280), 2));
+                    }
+                    if(targetX < 140 && targetY < 370 && Main.engNotDone) {
+                        Engineerv0 engineerv0 = new Engineerv0();
+                        try {
+                            Main.switchScene(Loading.scene(engineerv0.scene(), 2));
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                    if(targetX > 880 && targetY < 400 && Main.csNotDone) {
+                        ComputerScience computerScience = new ComputerScience();
+                        Main.switchScene(Loading.scene(computerScience.scene(), 2));
                     }
                 });
             }

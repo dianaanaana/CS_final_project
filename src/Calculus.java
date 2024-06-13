@@ -87,6 +87,8 @@ public class Calculus extends Application{
 	static Boolean b2s = false;
 
 	public static Scene scene() {
+		// Main.examDone++;
+		Main.calNotDone = false;
 		Main.music.swtichMusic(Main.music.main, Main.music.exam);
 		buttons.getChildren().addAll(startGame, ib);
 		pane_start.setCenter(buttons);
@@ -160,6 +162,7 @@ public class Calculus extends Application{
 					// primaryStage.setScene(conclude);
 					// Main.switchScene(conclude);
 					pane_ctrler.setCenter(Conclude(score, true));
+					Main.scores_calculus = score;
 					b2b = true;
 				} else if(round == 10 && score < 60) {
 					scene.setOnKeyPressed(null);
@@ -168,6 +171,7 @@ public class Calculus extends Application{
 					// primaryStage.setScene(conclude);
 					// Main.switchScene(conclude);
 					pane_ctrler.setCenter(Conclude(score, false));
+					Main.scores_calculus = score;
 					b2b = true;
 				} else if(score == 0) {
 					scene.setOnKeyPressed(null);
@@ -176,6 +180,7 @@ public class Calculus extends Application{
 					// primaryStage.setScene(conclude);
 					// Main.switchScene(conclude);
 					pane_ctrler.setCenter(Conclude(score, false));
+					Main.scores_calculus = score;
 					b2b = true;
 				}
 			}

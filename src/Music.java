@@ -19,6 +19,12 @@ public class Music {
     String drawV = new File("src/resources/musics/draw.mp3").toURI().toString();
     Media drawM = new Media(drawV);
     public MediaPlayer draw = new MediaPlayer(drawM);
+    String congratulationS = new File("src/resources/musics/congratulation.mp3").toURI().toString();
+    Media congratulationM = new Media(congratulationS);
+    public MediaPlayer congratulation = new MediaPlayer(congratulationM);
+    String failS = new File("src/resources/musics/21.mp3").toURI().toString();
+    Media failM = new Media(failS);
+    public MediaPlayer fail = new MediaPlayer(failM);
     Boolean initPlay = true;
     public void playMusic() {
         if(initPlay) {
@@ -27,6 +33,8 @@ public class Music {
             main.setVolume(0.1);
             exam.setVolume(0.05);
             draw.setVolume(0.1);
+            congratulation.setVolume(0.1);
+            fail.setVolume(0.1);
             buttonClick.setVolume(0.1);
             initPlay = false;
         }

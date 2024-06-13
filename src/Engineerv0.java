@@ -54,7 +54,7 @@ class Question{
 
 public class Engineerv0 extends Application{
 	private int score=0;
-	private int timeSeconds = 60;
+	private int timeSeconds = 30;
 	private Text timerLabel = new Text();
 
 	Boolean start = false;
@@ -75,6 +75,8 @@ public class Engineerv0 extends Application{
 	}
 	
 	public Scene scene() throws IOException{
+		// Main.examDone++;
+		Main.engNotDone = false;
 		Main.music.swtichMusic(Main.music.main, Main.music.exam);
 		Question question = new Question();
 		question.ReadTopic();
@@ -156,12 +158,12 @@ public class Engineerv0 extends Application{
 				// timeline.stop();
 				// primaryStage.setScene(conclude());
 				pane_ctrler.setCenter(conclude());
+				Main.scores_engineering = score;
 				b2b = true;
 			}
 		}));
 		// timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.setCycleCount(timeSeconds+3);
-		timeline.play();
 		
 		pane.setBottom(timerLabel);
 		BorderPane.setAlignment(timerLabel, Pos.BOTTOM_CENTER);

@@ -122,6 +122,7 @@ public class Draw extends Application{
 		view_tim.setFitHeight(500);
 		
 		view_tim.setOnMousePressed(e -> {
+			Main.mentorPP = 10;
 			Main.music.swtichMusic(Main.music.draw, Main.music.main);
 			hBox.getChildren().clear();
 		try {
@@ -153,6 +154,7 @@ public class Draw extends Application{
 		view_noah.setFitHeight(500);
 		
 		view_noah.setOnMousePressed(e -> {
+			Main.mentorPP = 20;
 			Main.music.swtichMusic(Main.music.draw, Main.music.main);
 		hBox.getChildren().clear();
 		try {
@@ -184,6 +186,7 @@ public class Draw extends Application{
 		view_steven.setFitHeight(500);
 		
 		view_steven.setOnMousePressed(e -> {
+			Main.mentorPP = 20;
 			Main.music.swtichMusic(Main.music.draw, Main.music.main);
 		hBox.getChildren().clear();
 		try {

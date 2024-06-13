@@ -70,6 +70,8 @@ public class Discrete extends Application{
     static ArrayList<objs> waste_2 = new ArrayList<>();
 
     public static Scene scene() {
+        // Main.examDone++;
+        Main.disNotDone = false;
         Main.music.swtichMusic(Main.music.main, Main.music.exam);
         pane_ctrler.setCenter(pane_start);
         pane_instruction.setCenter(instruction);
@@ -165,6 +167,7 @@ public class Discrete extends Application{
             }else if(gameTime <= -3) {
                 System.err.println("times up!");
                 pane_ctrler.setCenter(conclude());
+                Main.scores_discrete = score;
                 b2b = true;
             }
         }));
@@ -214,8 +217,11 @@ public class Discrete extends Application{
             if(!obj.isScored && !end) {
                 score += s;
                 scoreT.setText(Integer.toString(score));
-                if(s == -10) Main.music.wrongTyping.play();
+                if(s == -10) {
+                    Main.music.wrongTyping.stop();
+                    Main.music.wrongTyping.play();
                 // else Main.music.correctTyping.play();
+                }
             }
             obj.isScored = true;
             Timeline vanish = new Timeline();

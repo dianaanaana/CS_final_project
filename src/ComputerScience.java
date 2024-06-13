@@ -76,6 +76,8 @@ public class ComputerScience extends Application {
     private Button enter = new Button();
 
     public Scene scene() {
+        // Main.examDone++;
+        Main.csNotDone = false;
         Main.music.swtichMusic(Main.music.main, Main.music.exam);
         FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), bg);
         fadeOut.setFromValue(0.5);
@@ -325,6 +327,7 @@ public class ComputerScience extends Application {
         	pedroFa.play();
         }
         System.out.println(scores);
+        Main.scores_cs = scores;
         generatedNumbers.clear(); // 清空生成的數字
         initializeNumbers(); // 重新初始化可用數字
     }

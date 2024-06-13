@@ -64,15 +64,15 @@ public class Building_1 extends Application{
                     imageView.setImage(mainC_left);
                 }
                 // left boundary
-                if (targetX < 0) {
+                if (targetX + mainC.getWidth() < 0) {
                     System.err.println("Error: ImageView has hit the left boundary!");
-                    Main.switchScene(Loading.scene(Calculus.scene(), 2));
+                    // Main.switchScene(Loading.scene(Calculus.scene(), 2));
                     
                 }
                 // right boundary
                 if (targetX + mainC.getWidth() > scene.getWidth()) {
                     System.err.println("Error: ImageView has hit the right boundary!");
-                    Main.switchScene(Loading.scene(Discrete.scene(), 2));
+                    // Main.switchScene(Loading.scene(Discrete.scene(), 2));
                 }
                 // top boundary
                 if (targetY < 0) {
@@ -84,6 +84,8 @@ public class Building_1 extends Application{
                     System.err.println("Error: ImageView has hit the bottom boundary!");
                     Main.switchScene(Loading.scene(Road.scene(1280, 360), 2));
                 }
+                if(targetX < 140 && targetY < 370 && Main.calNotDone) Main.switchScene(Loading.scene(Calculus.scene(), 2));
+                if(targetX > 880 && targetY < 400 && Main.disNotDone) Main.switchScene(Loading.scene(Discrete.scene(), 2));
             });
         }
         });

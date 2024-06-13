@@ -12,17 +12,25 @@ public class Settings extends Application {
     static VBox center = new VBox();
     static ImageView musicSetting = new ImageView("/resources/images/musicSetting.png");
     static ImageView exit = new ImageView("/resources/images/back.png");
+    static Boolean initinvoke = true;
     public static Scene scene() {
-        pane.setCenter(center);
-        center.getChildren().addAll(musicSetting, exit);
-        center.setAlignment(Pos.CENTER);
+        if(initinvoke) {
+            pane.setCenter(center);
+            center.getChildren().addAll(musicSetting, exit);
+            center.setAlignment(Pos.CENTER);
+            initinvoke = false;
+        }
         musicSetting.setOnMouseClicked(e -> {
             System.err.println("Music setting");
-            Slider_for_music app = new Slider_for_music();
-            app.startApplication(new String[0]);
+            Main.music.buttonClick.stop();
+            Main.music.buttonClick.play();
+            Slider_for_music slider_for_music = new Slider_for_music();
+            Main.switchScene(Loading.scene(slider_for_music.scene(), 2));
         });
         exit.setOnMouseClicked(e -> {
             System.err.println("Exit settings");
+            Main.music.buttonClick.stop();
+            Main.music.buttonClick.play();
             Main.switchScene(Main.scene());
         });
         return scene;

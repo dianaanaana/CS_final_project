@@ -75,7 +75,7 @@ public class Road extends Application{
                     // left boundary
                 if (targetX < 0) {
                     System.err.println("Error: ImageView has hit the left boundary!");
-                    Main.switchScene(Loading.scene(Dorm.scene(1280, 360), 2));
+                    Main.switchScene(Loading.scene(Dorm.scene(370, 250), 2));
                 }
                 // right boundary
                 if (targetX + mainC.getWidth() > scene.getWidth()) {
@@ -93,7 +93,7 @@ public class Road extends Application{
                 // if (imageView.getBoundsInLocal().intersects(senpai.getBoundsInLocal())) {
                 //     System.err.println("Senpai: Hi, I'm your senpai.");
                 // }
-                if (targetX > 930 && targetX < 1040 && targetY > 400 && targetY < 500) {
+                if (targetX > 930 && targetX < 1040 && targetY > 400 && targetY < 500 && Main.mentorNotDone) {
                     System.err.println("Senpai: Hi, I'm your senpai.");
                     Draw draw = new Draw();
                     try {
