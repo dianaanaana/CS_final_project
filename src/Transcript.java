@@ -19,7 +19,7 @@ public class Transcript extends Application{
     static Text engineeringT = new Text("Engineering : " + Main.scores_engineering);
     static Text csT = new Text("CS : " + Main.scores_cs);
     static String mentorSRT = "要使用SR直屬的效果嗎？選擇一個科目加20分";
-    static String mentorNT = "要使用SR直屬的效果嗎？選擇一個科目加10分";
+    static String mentorNT = "要使用N直屬的效果嗎？選擇一個科目加10分";
     static String mentorNull = "沒直屬，只好靠自己";
     static Text mentor = new Text();
     static Image pp = new Image("resources/images/pp.jpg");
