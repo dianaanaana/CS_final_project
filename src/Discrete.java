@@ -70,7 +70,6 @@ public class Discrete extends Application{
     static ArrayList<objs> waste_2 = new ArrayList<>();
 
     public static Scene scene() {
-        // Main.examDone++;
         Main.disNotDone = false;
         Main.music.swtichMusic(Main.music.main, Main.music.exam);
         pane_ctrler.setCenter(pane_start);
@@ -232,8 +231,10 @@ public class Discrete extends Application{
     }
     private static void movement(objs obj, int e, int s) {
         Timeline move = new Timeline(
-            new KeyFrame(Duration.ZERO, new KeyValue(obj.translateXProperty(), obj.getTranslateX()), new KeyValue(obj.translateYProperty(), obj.getTranslateY())),
-            new KeyFrame(Duration.seconds(s), new KeyValue(obj.translateXProperty(), positions[e][obj.end][0] - obj.getFitWidth() / 2), new KeyValue(obj.translateYProperty(), positions[e][obj.end][1]- obj.getFitHeight() / 2))
+            new KeyFrame(Duration.ZERO, new KeyValue(obj.translateXProperty(), obj.getTranslateX()), 
+                                        new KeyValue(obj.translateYProperty(), obj.getTranslateY())),
+            new KeyFrame(Duration.seconds(s), new KeyValue(obj.translateXProperty(), positions[e][obj.end][0] - obj.getFitWidth() / 2),
+                                              new KeyValue(obj.translateYProperty(), positions[e][obj.end][1]- obj.getFitHeight() / 2))
         );
         move.play();
         move.setOnFinished(eMove -> {

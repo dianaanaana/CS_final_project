@@ -90,9 +90,6 @@ public class Road extends Application{
                 if (targetY + mainC.getHeight() > scene.getHeight()) {
                     System.err.println("Error: ImageView has hit the bottom boundary!");
                 }
-                // if (imageView.getBoundsInLocal().intersects(senpai.getBoundsInLocal())) {
-                //     System.err.println("Senpai: Hi, I'm your senpai.");
-                // }
                 if (targetX > 930 && targetX < 1040 && targetY > 400 && targetY < 500 && Main.mentorNotDone) {
                     System.err.println("Senpai: Hi, I'm your senpai.");
                     Draw draw = new Draw();
@@ -105,8 +102,6 @@ public class Road extends Application{
                 });
             }
         });
-
-
         return scene;
     }
     public void start(Stage stage) {

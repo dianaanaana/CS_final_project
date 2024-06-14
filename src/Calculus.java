@@ -87,16 +87,13 @@ public class Calculus extends Application{
 	static Boolean b2s = false;
 
 	public static Scene scene() {
-		// Main.examDone++;
 		Main.calNotDone = false;
 		Main.music.swtichMusic(Main.music.main, Main.music.exam);
 		buttons.getChildren().addAll(startGame, ib);
 		pane_start.setCenter(buttons);
 		buttons.setAlignment(Pos.CENTER);
 		pane_instruction.setCenter(instruction);
-		// stackPane.getChildren().addAll(bg, pane);
 		stackPane.getChildren().addAll(bg, pane_ctrler);
-		// pane_ctrler.setCenter(stackPane);
 		pane_ctrler.setCenter(pane_start);
 		FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), bg);
         fadeOut.setFromValue(0.5);
@@ -190,7 +187,6 @@ public class Calculus extends Application{
 				b2s = true;
 			});
 		});
-
 		scene.setOnMouseClicked(e -> {
 			if(b2s) {
 				pane_ctrler.setCenter(pane_start);
@@ -205,12 +201,10 @@ public class Calculus extends Application{
 	}
 	
 	public void start(Stage primaryStage) {
-		// this.primaryStage = primaryStage;
 		primaryStage.setTitle("Calculus");
 		primaryStage.setScene(scene());
 		primaryStage.show();
 	}
-	
 	
 	static public BorderPane Conclude(int score, boolean pass) {
 		BorderPane pane = new BorderPane();
@@ -229,7 +223,6 @@ public class Calculus extends Application{
 		show_result.getChildren().addAll(result, scoreText);
 		show_result.setAlignment(Pos.CENTER);
 		pane.setCenter(show_result);
-		// Scene scene = new Scene(pane, 1280, 720);
 		return pane;
 	}
 	

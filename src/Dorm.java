@@ -57,8 +57,10 @@ public class Dorm extends Application{
                     imageView.setImage(walk_left);
                 }
                 Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.ZERO, new KeyValue(imageView.translateXProperty(), oldX), new KeyValue(imageView.translateYProperty(), oldY)),
-                    new KeyFrame(Duration.seconds(duration), new KeyValue(imageView.translateXProperty(), targetX), new KeyValue(imageView.translateYProperty(), targetY))
+                    new KeyFrame(Duration.ZERO, new KeyValue(imageView.translateXProperty(), oldX), 
+                                                new KeyValue(imageView.translateYProperty(), oldY)),
+                    new KeyFrame(Duration.seconds(duration), new KeyValue(imageView.translateXProperty(), targetX), 
+                    new KeyValue(imageView.translateYProperty(), targetY))
                 );
                 timeline.play();
                 timeline.setOnFinished(e2 -> {
@@ -74,7 +76,6 @@ public class Dorm extends Application{
                     // right boundary
                     if (targetX + mainC.getWidth() > scene.getWidth()) {
                         System.err.println("Error: ImageView has hit the right boundary!");
-                        // Main.switchScene(Loading.scene(Road.scene(0, 360), 2));
                     }
                     // top boundary
                     if (targetY < 0) {
@@ -90,7 +91,6 @@ public class Dorm extends Application{
         });
 
         scene.setOnMouseClicked(e -> {
-            // System.err.println("examDone: " + Main.examDone);
             if(!Main.calNotDone && !Main.disNotDone && !Main.engNotDone && !Main.csNotDone) {
                 Main.switchScene(Loading.scene(Transcript.scene(), 2));
             }

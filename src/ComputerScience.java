@@ -175,7 +175,6 @@ public class ComputerScience extends Application {
 
             BorderPane.setAlignment(topBox, Pos.CENTER);
             BorderPane.setAlignment(al, Pos.CENTER);
-//            BorderPane.setAlignment(choose, Pos.CENTER);
             
             choose.setFont(new Font(25));  //tim
             content.setTop(topBox);
@@ -212,7 +211,6 @@ public class ComputerScience extends Application {
                     b2s = false;
                 }
                 if(b2b) {
-                    // primaryStage.close();
                     Main.switchScene(Loading.scene(Building_2.scene(1280, 360), 2));
                     Main.music.swtichMusic(Main.music.exam, Main.music.main);
                 }
@@ -221,10 +219,6 @@ public class ComputerScience extends Application {
     	catch(Exception e) {
     		System.out.println(e.getMessage());
     	}
-
-        
-
-
         return scene;
     }
 
@@ -299,12 +293,9 @@ public class ComputerScience extends Application {
             }
         }
     }
-
     private void checkResult() {
         int matches = 0;
-        
 //        System.out.println("\n");
-        
         for (String chosen : numbers) {
             System.out.print(chosen);
 
@@ -318,7 +309,6 @@ public class ComputerScience extends Application {
 //        for (int num:generatedNumbers) {
 //        	System.out.print(num);
 //        }
-
         scores -= matches * 30;
         scoreLabel.setText("Score: " + Integer.toString(scores));
         if(scores>=60) {
@@ -406,15 +396,6 @@ public class ComputerScience extends Application {
             numWeChoose += (value + " ");
             System.out.println(value);
         }
-    }
-    public void startApplication(String[] args) {
-        Platform.runLater(() -> {
-            try {
-                start(new Stage());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
     }
     public static void main(String[] args) {
         launch(args);

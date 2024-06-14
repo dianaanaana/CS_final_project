@@ -75,7 +75,6 @@ public class Engineerv0 extends Application{
 	}
 	
 	public Scene scene() throws IOException{
-		// Main.examDone++;
 		Main.engNotDone = false;
 		Main.music.swtichMusic(Main.music.main, Main.music.exam);
 		Question question = new Question();
@@ -155,14 +154,11 @@ public class Engineerv0 extends Application{
 				scene.setOnKeyPressed(null);
 			}
 			else if(timeSeconds <= -3) {
-				// timeline.stop();
-				// primaryStage.setScene(conclude());
 				pane_ctrler.setCenter(conclude());
 				Main.scores_engineering = score;
 				b2b = true;
 			}
 		}));
-		// timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.setCycleCount(timeSeconds+3);
 		
 		pane.setBottom(timerLabel);
